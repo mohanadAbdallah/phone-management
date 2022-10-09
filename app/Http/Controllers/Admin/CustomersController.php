@@ -111,8 +111,8 @@ class CustomersController extends Controller
 
     }
     public function printPayments($id){
-        $customerPayments = Customer::find($id);
-        return view('admin.customers.print', compact('customerPayments'));
+        $mobilePayments = Mobile::find($id);
+        return view('admin.customers.print', compact('mobilePayments'));
 
     }
 

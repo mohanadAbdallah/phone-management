@@ -37,17 +37,20 @@ class MobileController extends Controller
     {
       $customer = Customer::create($request->validated());
 
-      $mobile= $customer->mobile()->create($request->validated());
-
-
+      $mobile= $customer->mobile()->create(
+          [
+              'mobile_name'=>$request->mobile_name,
+              'type'=>$request->type,
+              'salary'=>$request->salary,
+              'created_at'=>$request->created_at,
+              'notes'=>$request->notes,
+              'date'=>$request->created_at
+          ]);
 
         $mobile->customer()->update([
             'mobile_id'=>$mobile->id,
+        ]);
 
-        ]);
-        $mobile->update([
-            'date'=>Carbon::now()->toDateString(),
-        ]);
 
         return redirect()->route('customers.showPayments',$customer->id)->with(['success'=>'تمت الاضافة بنجاح']);
     }

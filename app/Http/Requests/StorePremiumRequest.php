@@ -25,13 +25,13 @@ class StorePremiumRequest extends FormRequest
     {
         return [
             'customer_name'=>'required',
-            'email'=>'required',
+            'email'=>'required|email',
             'address'=>'required',
-            'phone'=>'required',
-            'identity'=>'required',
+            'phone'=>'required|numeric',
+            'identity'=>'required|numeric',
             'mobile_name'=>'required',
             'type'=>'required',
-            'salary'=>'required',
+            'salary'=>'required|numeric',
             'created_at'=>'required'
         ];
     }

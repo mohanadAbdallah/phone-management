@@ -45,13 +45,12 @@ class PaymentsController extends Controller
         $mobile->update([
             'date'=>$request->created_at,
         ]);
-        ddd($mobile);
         return redirect()->back()->with(['success'=>'تمت إضافة الدفعة بنجاح']);
     }
     public function requiredPayment()
     {
-        $mobilePayments = mobile_payment::with('mobile')->latest()->
-        where('created_at', '<=', Carbon::now()->subDays(30)->toDateTimeString())
+        $mobilePayments = Mobile::with('mobile_payments')
+            ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
             ->get();
 
         return view('admin.payments.requiredPayments',compact('mobilePayments'))->with('i');

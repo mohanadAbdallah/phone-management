@@ -4,14 +4,6 @@
 @section('content')
     @include('includes.messages')
     <div class="card">
-        <div class="card-header header-elements-inline">
-            <h2 class="card-title"><b>@lang('app.premiums')</b></h2>
-            <div class="header-elements">
-                <div class="list-icons">
-                </div>
-            </div>
-        </div>
-
         <div class="card-body">
         </div>
 
@@ -38,51 +30,51 @@
                     </thead>
                     <tbody>
 
-                    @foreach($mobilePayments as $item)
+                    @foreach($mobilePayments ?? [] as $item)
                         <tr role="row" class="odd">
                             <td >{{++$i}}</td>
                             <td style="width: 20%">
-                                <a href="{{route('customers.showPayments',$item->mobile->customer->id)}}">
-                                    <span>{{$item->mobile->customer->customer_name ?? '--'}}</span>
+                                <a href="{{route('customers.showPayments',$item->customer->id ?? '')}}">
+                                    <span>{{$item->customer->customer_name ?? '--'}}</span>
                                 </a>
 
                             </td>
-                            <td style="width:10%">{{$item->mobile->customer->phone ?? '--'}}</td>
+                            <td style="width:10%">{{$item->customer->phone ?? '--'}}</td>
                             <td >
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#addressModal-{{$item->mobile->customer->id}}">
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#addressModal-{{$item->customer->id ?? ''}}">
                                     <span class="badge badge-secondary" style="font-size: 8px;">عرض العنوان </span>
                                 </a>
                             </td>
                             <td style="text-align: center">
 
-                                <a href="{{route('customers.showPayments',$item->mobile->id)}}" style="color: black">
-                                    <span class="badge badge-success" style="background-color: #00860a; font-size: 10px;">{{$item->mobile->residual}}</span>
+                                <a href="{{route('customers.showPayments',$item->id ?? '')}}" style="color: black">
+                                    <span class="badge badge-success" style="background-color: #00860a; font-size: 10px;">{{$item->residual}}</span>
                                 </a>
 
                             </td>
                             <td>
                                 <ul>
 
-                                    <li> <a href="{{route('mobiles.show',$item->id)}}">
-                                            <span style="font-size: 12px;">{{$item->mobile->mobile_name ?? '--'}}</span>
+                                    <li> <a href="{{route('mobiles.show',$item->id ?? '')}}">
+                                            <span style="font-size: 12px;">{{$item->mobile_name ?? '--'}}</span>
                                         </a>
                                     </li>
                                 </ul>
                             </td>
                             <td class="text-center" >
                                 <div class="list-icons">
-                                    <a href="{{route('customers.edit',$item->mobile->customer->id)}}" class="list-icons-item">
+                                    <a href="{{route('customers.edit',$item->customer->id ?? '')}}" class="list-icons-item">
                                         <span class="badge badge-primary badge-pill">  <i class="icon-pencil7"></i></span>
 
                                     </a>
-                                    <a href="{{route('customers.show',$item->mobile->customer->id)}}" class="list-icons-item">
+                                    <a href="{{route('customers.show',$item->customer->id ?? '')}}" class="list-icons-item">
                                         <span class="badge badge-success badge-pill"><i class="icon-cog6"></i></span>
                                     </a>
 
                                 </div>
                             </td>
                         </tr>
-                        <div class="modal fade" id="addressModal-{{$item->mobile->customer->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="addressModal-{{$item->customer->id ?? ''}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -92,7 +84,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        {{$item->mobile->customer->address}}
+                                        {{$item->customer->address ?? ''}}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">@lang('app.close')</button>

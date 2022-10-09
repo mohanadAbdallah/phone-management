@@ -119,6 +119,8 @@ return [
     'attributes'           => [
         'name'                  => 'الاسم',
         'payment'                  => 'الدفعة',
+        'identity'                  => 'رقم الهوية',
+        'salary'                  => 'السعر',
         'username'              => 'اسم المُستخدم',
         'email'                 => 'البريد الالكتروني',
         'first_name'            => 'الاسم',

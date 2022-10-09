@@ -25,7 +25,7 @@
                         {{Cache::get('app_name','Mohannad Phone')}}
                    </td>
                 <td style="width: 50%"> تاريخ
-                    الاضافة: {{$customerPayments->mobile->created_at->format('d-m-Y')}} {{$customerPayments->mobile->created_at->format('H:i')}}</td>
+                    الاضافة: {{$mobilePayments->created_at->format('d-m-Y')}} {{$mobilePayments->created_at->format('H:i')}}</td>
 
             </tr>
             <tr>
@@ -59,20 +59,20 @@
             </tr>
             <tr>
                 <td style="width: 50%;; border-left: 1px solid black; border-right: 1px solid black;">
-                     الاسم: {{$customerPayments->customer_name ?? '--'}}</td>
+                     الاسم: {{$mobilePayments->customer->customer_name ?? '--'}}</td>
                 <td style="width: 25%; border-left: 1px solid black; border-right: 1px solid black;">
-                     العنوان: {{$customerPayments->address ?? '--'}}</td>
+                     العنوان: {{$mobilePayments->customer->address ?? '--'}}</td>
                 <td style="width: 25%; border-left: 1px solid black; border-right: 1px solid black;">
-                     {{$customerPayments->mobile->mobile_name ?? '--'}}</td>
+                     {{$mobilePayments->mobile_name ?? '--'}}</td>
             </tr>
             <tr>
                 <td style="width: 50%; border-left: 1px solid black; border-right: 1px solid black;">الهاتف:
-                    {{$customerPayments->phone ?? '--'}}</td>
+                    {{$mobilePayments->customer->phone ?? '--'}}</td>
                 <td style="width: 25%; border-left: 1px solid black; border-right: 1px solid black;">
-                     الهوية :{{$customerPayments->identity ?? '--'}}
+                     الهوية :{{$mobilePayments->customer->identity ?? '--'}}
                 </td>
                 <td style="width: 25%; border-left: 1px solid black; border-right: 1px solid black;">
-                  السعر الإجمالي :   {{$customerPayments->mobile->salary ?? '--'}}
+                  السعر الإجمالي :   {{$mobilePayments->salary ?? '--'}}
                 </td>
             </tr>
             <tr>
@@ -92,7 +92,7 @@
                 <td style="font-weight: bold;border: 1px solid black">@lang('app.description')</td>
 
             </tr>
-            @foreach($customerPayments->mobile->mobile_payments ?? [] as $payment)
+            @foreach($mobilePayments->mobile_payments ?? [] as $payment)
                 <tr>
                     <td style="border: 1px solid black">{{++ $loop->index}}</td>
                     <td style="border: 1px solid black">{{$payment->payment ?? ' 0.0 '}} شيكل </td>
@@ -109,7 +109,7 @@
             <tr>
                </td>
                 <td style="border: 1px solid black; width: 50%">المتبقي : </td>
-                <td style="border: 1px solid black; width: 50%; text-align: center">{{$customerPayments->mobile->residual ?? '0.0'}} شيكل </td>
+                <td style="border: 1px solid black; width: 50%; text-align: center">{{$mobilePayments->residual ?? '0.0'}} شيكل </td>
             </tr>
 
             </tbody>
