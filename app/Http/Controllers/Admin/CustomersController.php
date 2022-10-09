@@ -48,7 +48,7 @@ class CustomersController extends Controller
     public function showPayments($id)
     {
         $customer = Customer::with('mobile')->find($id);
-        return view('admin.customers.showPayments',compact('customer'))->with('i');
+        return view('admin.payments.showPayments',compact('customer'))->with('i');
     }
 
 

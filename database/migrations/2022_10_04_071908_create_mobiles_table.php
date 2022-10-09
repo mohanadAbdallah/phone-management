@@ -21,6 +21,7 @@ class CreateMobilesTable extends Migration
             $table->string('salary')->nullable();
             $table->unsignedBigInteger('residual')->nullable();
             $table->text('notes')->nullable();
+            $table->timestamp('date');
             $table->timestamps();
         });
     }

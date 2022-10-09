@@ -75,6 +75,9 @@
                 <li class="nav-item">
                     <a href="{{route('customers.index')}}" class=" font-size-lg nav-link {{request()->routeIs('customers.*')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.customers')</span></a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('payments.required')}}" class=" font-size-lg nav-link {{request()->routeIs('payments.*')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.required_premium')</span></a>
+                </li>
 
                 <li class="nav-item" >
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PaymentsRequest;
 use App\Models\Mobile;
 use App\Models\mobile_payment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -39,17 +40,25 @@ class PaymentsController extends Controller
     public function store(PaymentsRequest $request , $id)
     {
         $mobile=Mobile::with('mobile_payments')->find($id);
-        $mobile->mobile_payments()->create($request->validated());
 
+        $mobile->mobile_payments()->create($request->validated());
+        $mobile->update([
+            'date'=>$request->created_at,
+        ]);
+        ddd($mobile);
         return redirect()->back()->with(['success'=>'تمت إضافة الدفعة بنجاح']);
     }
+    public function requiredPayment()
+    {
+        $mobilePayments = mobile_payment::with('mobile')->latest()->
+        where('created_at', '<=', Carbon::now()->subDays(30)->toDateTimeString())
+            ->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        return view('admin.payments.requiredPayments',compact('mobilePayments'))->with('i');
+
+    }
+
+
     public function show($id)
     {
         //

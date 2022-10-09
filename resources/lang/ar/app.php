@@ -18,6 +18,7 @@
       'premiums_type'=>'نوع القسط',
       'price_in_shekel'=>'السعر بالشيكل',
       'actions'=>'العملية',
+      'required_premium'=>'الأقساط المستحقة',
 
 
       'services' => 'الخدمات',

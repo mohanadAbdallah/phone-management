@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mobile extends Model
 {
     use HasFactory;
-    protected $fillable = ['mobile_name','type','salary','residual','customer_id','created_at'];
+    protected $fillable = ['mobile_name','type','salary','residual','customer_id','created_at','date'];
 
     protected $appends=['residual'];
 

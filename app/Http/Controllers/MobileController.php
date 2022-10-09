@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePremiumRequest;
 use App\Models\Customer;
 use App\Models\Mobile;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -35,13 +36,23 @@ class MobileController extends Controller
     public function store(StorePremiumRequest $request)
     {
       $customer = Customer::create($request->validated());
+
       $mobile= $customer->mobile()->create($request->validated());
+
+
 
         $mobile->customer()->update([
             'mobile_id'=>$mobile->id,
+
         ]);
+        $mobile->update([
+            'date'=>Carbon::now()->toDateString(),
+        ]);
+
         return redirect()->route('customers.showPayments',$customer->id)->with(['success'=>'تمت الاضافة بنجاح']);
     }
+
+
 
     /**
      * Display the specified resource.

@@ -15,6 +15,7 @@ return [
     'price_in_shekel'=>'Price In Shekel',
     'identity'=>'ID. No',
     'actions'=>'Actions',
+    'required_premium'=>'Required Premium',
 
     'orders' => 'Orders',
     'services' => 'Services',

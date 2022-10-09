@@ -47,10 +47,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         //Mobiles
         Route::resource('mobiles',MobileController::class);
 
+
         //payments
         Route::resource('payments', PaymentsController::class);
         Route::post('{id}/payments',[PaymentsController::class,'store'])->name('payments.store');
         Route::post('{id}/payments/print', [CustomersController::class,'printPayments'])->name('payments.print');
+        Route::get('requiredPayment',[PaymentsController::class,'requiredPayment'])->name('payments.required');
 
 
         //Customer
