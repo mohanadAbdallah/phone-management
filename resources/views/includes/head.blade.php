@@ -94,12 +94,6 @@
 
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbF9O9Ks9_-QNWHi2SFxLqLUBOwrMyzXk"></script>
-    <script src="{{asset('global_assets/js/demo_maps/google/markers/simple.js')}}"></script>
-    <script src="{{asset('global_assets/js/demo_maps/google/markers/animation.js')}}"></script>
-    <script src="{{asset('global_assets/js/demo_maps/google/markers/symbols_predefined.js')}}"></script>
-    <script src="{{asset('global_assets/js/demo_maps/google/markers/symbols_custom.js')}}"></script>
-
 
 
 

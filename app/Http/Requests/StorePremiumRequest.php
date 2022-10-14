@@ -34,5 +34,7 @@ class StorePremiumRequest extends FormRequest
             'salary'=>'required|numeric',
             'created_at'=>'required'
         ];
+
     }
+
 }

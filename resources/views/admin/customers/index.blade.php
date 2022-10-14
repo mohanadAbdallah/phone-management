@@ -80,6 +80,7 @@
                             </a>
                         </div>
                     @endforeach
+
                         <div class="col-xl-3">
                             <a href="{{route('customers.create')}}">
                                 <div class="card text-center crypto-card-3 pull-up" >

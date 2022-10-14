@@ -2,8 +2,14 @@
 
 namespace App\Console;
 
+use App\Console\Commands\sendNotificationCommand;
+use App\Models\Mobile;
+use App\Models\User;
+use App\Notifications\requiredPaymentNotification;
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Notification;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,9 +19,14 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+    protected $commands = [
+        sendNotificationCommand::class,
+        ];
+
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('model:prune')->daily();
+        $schedule->command('notification:sent')->daily();
     }
 
     /**

@@ -46,7 +46,7 @@
                        <div class="col-md-3">
                            <div class="form-group">
                                <label class="text">@lang('app.date')</label>
-                               <input type="date" value="<?= date('Y-m-d') ?>" class="form-control" name="created_at">
+                               <input type="date" value="{{ old('created_at') ?? date('Y-m-d')}}" class="form-control" name="created_at">
                            </div>
                        </div>
                    </div>
@@ -61,7 +61,7 @@
                                 <div class="mt-4 form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.name') :</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('customer_name')is-invalid @enderror" placeholder=" @lang('app.name')" name="customer_name"/>
+                                        <input type="text" class="form-control @error('customer_name')is-invalid @enderror" value="{{old('customer_name')}}" placeholder=" @lang('app.name')" name="customer_name"/>
                                         @if ($errors->has('customer_name'))
                                             <span class="text-danger">{{ $errors->first('customer_name') }}</span>
                                         @endif
@@ -71,7 +71,7 @@
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required ">@lang('app.email')</label>
                                     <div class="col-sm-8">
 
-                                        <input type="text" class="form-control @error('email')is-invalid @enderror" placeholder=" @lang('app.email')" name="email"/>
+                                        <input type="text" class="form-control @error('email')is-invalid @enderror" value="{{old('email')}}" placeholder=" @lang('app.email')" name="email"/>
                                         @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                         @endif
@@ -81,24 +81,26 @@
                                 <div class="form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.phone')</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('phone')is-invalid @enderror" placeholder=" @lang('app.phone')" name="phone"/>
+                                        <input type="text" class="form-control @error('phone')is-invalid @enderror" value="{{old('phone')}}" placeholder=" @lang('app.phone')" name="phone"/>
                                         @if ($errors->has('phone'))
                                             <span class="text-danger">{{ $errors->first('phone') }}</span>
                                         @endif
                                     </div>
                                 </div>
+
+
                                 <div class="form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.address')</label>
                                     <div class="col-sm-8">
 
-                                        <input type="text" class="form-control @error('address')is-invalid @enderror" placeholder="@lang('app.address')" name="address"/>
+                                        <input type="text" class="form-control @error('address')is-invalid @enderror" value="{{old('address')}}" placeholder="@lang('app.address')" name="address"/>
 
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.identity')</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('identity')is-invalid @enderror" placeholder="@lang('app.identity_no')" name="identity"/>
+                                        <input type="text" class="form-control @error('identity')is-invalid @enderror" value="{{old('identity')}}" placeholder="@lang('app.identity_no')" name="identity"/>
                                         @if ($errors->has('identity'))
                                             <span class="text-danger">{{ $errors->first('identity') }}</span>
                                         @endif
@@ -113,7 +115,7 @@
                                 <div class="mt-4 form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.type')</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('type')is-invalid @enderror" placeholder="@lang('app.premiums_type')" name="type"/>
+                                        <input type="text" class="form-control @error('type')is-invalid @enderror" value="{{old('type')}}" placeholder="@lang('app.premiums_type')" name="type"/>
                                         @if ($errors->has('type'))
                                             <span class="text-danger">{{ $errors->first('type') }}</span>
                                         @endif
@@ -122,7 +124,7 @@
                                 <div class="form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.name')</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('mobile_name')is-invalid @enderror" placeholder="@lang('app.mobile_name')" name="mobile_name"/>
+                                        <input type="text" class="form-control @error('mobile_name')is-invalid @enderror" value="{{old('mobile_name')}}" placeholder="@lang('app.mobile_name')" name="mobile_name"/>
                                         @if ($errors->has('mobile_name'))
                                             <span class="text-danger">{{ $errors->first('mobile_name') }}</span>
                                         @endif
@@ -131,17 +133,18 @@
                                 <div class="form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.price')</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('salary')is-invalid @enderror" placeholder="@lang('app.price_in_shekel')" name="salary"/>
+                                        <input type="text" class="form-control @error('salary')is-invalid @enderror" value="{{old('salary')}}" placeholder="@lang('app.price_in_shekel')" name="salary"/>
                                         @if ($errors->has('salary'))
                                             <span class="text-danger">{{ $errors->first('salary') }}</span>
                                         @endif
                                     </div>
                                 </div>
 
+
                                 <div class="form-group row">
                                     <div class="col-md-10 ml-2">
                                         <label for="exampleFormControlTextarea1">@lang('app.notes')</label>
-                                        <textarea  name="notes" id="exampleFormControlTextarea1" rows="5" class="form-control"></textarea>
+                                        <textarea  name="notes" id="exampleFormControlTextarea1"  rows="5" class="form-control"></textarea>
                                     </div>
                                 </div>
                             </div>

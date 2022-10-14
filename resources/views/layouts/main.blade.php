@@ -6,32 +6,7 @@
         @endif
         @include('includes.head')
 
-        <style>
-            .badge-primary {
-                color: #fff;
-                background-color: #7931ad;
-            }
-            .badge-danger {
-                color: #fff;
-                background-color: #d645cf;
-            }
-            .badge-success {
-                color: #fff;
-                background-color: rgba(178, 69, 255, 0.51);
-            }
-            .badge-warning{
-                color: #fff;
-                background-color: rgb(146, 0, 156);
-            }
-            .to-top {
-                color: #400057;
-            }
-            .to-bottom {
-                color: rgba(193, 21, 168, 0.6);
-                text-decoration: none;
-                background-color: transparent;
-            }
-        </style>
+
         <body>
         <!-- Main navbar -->
         @include('includes.navbar')

@@ -76,11 +76,11 @@
                     <div class="media">
                         <div class="media-body ">
                             <h3 class="mb-0">{{$customer}}</h3>
-                            <span class="text-uppercase font-size-xs font-weight-bold">Month income</span>
+                            <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.customers')</span>
                         </div>
 
                         <div class="mr-3 align-self-center">
-                            <i class="icon-coin-dollar icon-3x opacity-75"></i>
+                            <i class="icon-users4 icon-3x opacity-75"></i>
                         </div>
                     </div>
                 </div>
@@ -89,12 +89,12 @@
                 <div class="card card-body bg-danger-400 has-bg-image">
                     <div class="media">
                         <div class="media-body">
-                            <h3 class="mb-0">{{$users}}</h3>
-                            <span class="text-uppercase font-size-xs font-weight-bold">Year income</span>
+                            <h3 class="mb-0">{{$mobile}}</h3>
+                            <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.mobiles')</span>
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <i class="icon-cash icon-3x opacity-75"></i>
+                            <i class="icon-mobile3 icon-3x opacity-75"></i>
                         </div>
                     </div>
                 </div>
@@ -103,8 +103,10 @@
                 <div class="card card-body bg-success-400 has-bg-image">
                     <div class="media">
                         <div class="media-body ">
-                            <h3 class="mb-0">{{$customer}}</h3>
-                            <span class="text-uppercase font-size-xs font-weight-bold">Month income</span>
+                            <h3 class="mb-0">
+                                {{$total}}
+                            </h3>
+                            <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.overall_salaries')</span>
                         </div>
 
                         <div class="mr-3 align-self-center">
@@ -118,8 +120,8 @@
                 <div class="card card-body">
                     <div class="media">
                         <div class="media-body" style="">
-                            <h6 class="media-title font-weight-semibold">عدد الطلبات</h6>
-                            <h3><b> 15 </b></h3>
+                            <h6 class="media-title font-weight-semibold">@lang('app.required_premium')</h6>
+                            <h3><b> {{$required_payments}} </b></h3>
 
                         </div>
                     </div>
@@ -130,8 +132,8 @@
                 <div class="card card-body">
                     <div class="media">
                         <div class="media-body" style="">
-                            <h6 class="media-title font-weight-semibold">عدد المستخدمين</h6>
-                            <h3><b>10</b></h3>
+                            <h6 class="media-title font-weight-semibold">@lang('app.residual_salaries')</h6>
+                            <h3><b>{{$residual}} @lang('app.shekel')</b></h3>
 
                         </div>
                     </div>
@@ -142,16 +144,95 @@
                 <div class="card card-body">
                     <div class="media">
                         <div class="media-body" style="">
-                            <h6 class="media-title font-weight-semibold">عدد الطلبات المنتهية</h6>
-                            <h3><b>7</b></h3>
+                            <h6 class="media-title font-weight-semibold">@lang('app.expired_premiums')</h6>
+                            <h3><b>{{$expired_premiums}}</b></h3>
 
                         </div>
                     </div>
                 </div>
             </div>
-
 
         </div>
     </div>
-@endsection
+    <div class="card">
+        <div class="card-header">
+            <b> @lang('app.notifications')</b>
+        </div>
 
+        <div class="card-body">
+            @if(session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+
+                @forelse($notifications->where('type','App\Notifications\requiredPaymentNotification') as $notification)
+                    <div class="alert alert-success" role="alert">
+                       دفعة مستحقة .
+                        [{{ $notification->created_at }}]  {{ $notification->data['mobile_name'] }} {{ $notification->data['customer_name'] ?? '' }}.
+                        <a href="#" class="float-right mark-as-read" data-id="{{ $notification->id }}">
+                            @lang('app.mark_as_read')
+                        </a>
+                    </div>
+
+                    @if($loop->last)
+                        <a href="#" id="mark-all">
+                            @lang('app.mark_all_as_read')
+                        </a>
+                    @endif
+                @empty
+                  لا يوجد هناك إشعارات عن دفعات مستحقة .
+                @endforelse
+                <hr>
+                @forelse($notifications->where('type','App\Notifications\ExpiredMobileNotification') as $notification)
+                    <div class="alert alert-success" role="alert">
+                       قسط منتهي بتاريخ :
+
+                        [{{ $notification->created_at }} ]  : --<b>   الجوال : </b>  {{ $notification->data['mobile_name'] }} : -- <b> للزبون : </b> {{ $notification->data['customer_name'] ?? '' }}.
+                        <a href="#" class="float-right mark-as-read" data-id="{{ $notification->id }}">
+                            @lang('app.mark_as_read')
+                        </a>
+                    </div>
+
+                    @if($loop->last)
+                        <a href="#" id="mark-all">
+                            @lang('app.mark_all_as_read')
+                        </a>
+                    @endif
+                @empty
+                    لا يوجد هناك إشعارات عن أقساط منتهية .
+                @endforelse
+        </div>
+    </div>
+@endsection
+@section('scripts')
+    @parent
+    @if(auth()->user()->is_admin)
+        <script>
+            function sendMarkRequest(id = null) {
+                return $.ajax("{{ route('admin.markNotification') }}", {
+                    method: 'POST',
+                    data: {
+                        _token,
+                        id
+                    }
+                });
+            }
+            $(function() {
+                $('.mark-as-read').click(function() {
+                    let request = sendMarkRequest($(this).data('id'));
+                    request.done(() => {
+                        $(this).parents('div.alert').remove();
+                    });
+                });
+                $('#mark-all').click(function() {
+                    let request = sendMarkRequest();
+                    request.done(() => {
+                        $('div.alert').remove();
+                    })
+                });
+            });
+        </script>
+    @endif
+@endsection

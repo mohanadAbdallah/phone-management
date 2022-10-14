@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable ,  HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    protected $appends=['total_salaries'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +43,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function getTotalSalaries()
+    {
+        $total = 0;
+        foreach (Mobile::all() as $salary) {
+            $total += $salary->salary;
+        }
+        return $total;
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+
+    }
+    public function mobiles()
+    {
+        return $this->hasMany(Mobile::class);
+
+    }
 }

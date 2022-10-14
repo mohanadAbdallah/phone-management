@@ -47,7 +47,7 @@
                             </td>
                             <td style="text-align: center">
 
-                                <a href="{{route('customers.showPayments',$item->id ?? '')}}" style="color: black">
+                                <a href="{{route('customers.showPayments',$item->customer->id ?? '')}}" style="color: black">
                                     <span class="badge badge-success" style="background-color: #00860a; font-size: 10px;">{{$item->residual}}</span>
                                 </a>
 

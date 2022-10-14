@@ -3,31 +3,63 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePremiumRequest;
+use App\Models\Alert;
 use App\Models\Customer;
 use App\Models\Mobile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class MobileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $customer = Customer::has('mobile')->get();
-        return view('admin.mobile.index',compact('customer'))->with('i');
+        $mobile = Mobile::UserMobiles()->with('customer')
+            ->orderBy('status','asc')->get();
+
+        return view('admin.mobile.index',compact('mobile'))->with('i');
 
     }
+    public function showNotificaton()
+    {
+        $notifications = auth()->user()->unreadNotifications;
+        return view('showNotification', compact('notifications'));
+    }
+    public function getUnreadNotification($id)
+    {
+        $notifications = auth()->user()->unreadNotifications;
+        $notificationsCount = count($notifications);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+        if (count($notifications) != 0) {
+            $response = [
+                'code' => 200,
+                'success' => true,
+                'count' => $notificationsCount,
+                'notifications' => $notifications,
+            ];
+        } else {
+
+            $response = [
+                'code' => 404,
+                'success' => false,
+            ];
+        }
+        return response()->json($response);
+    }
+
+    public function markNotification(Request $request)
+    {
+        auth()->user()
+            ->unreadNotifications
+            ->when($request->input('id'), function ($query) use ($request) {
+                return $query->where('id', $request->input('id'));
+            })
+            ->markAsRead();
+
+        return response()->noContent();
+    }
+
     public function create()
     {
         return view('admin.mobile.create');
@@ -35,8 +67,7 @@ class MobileController extends Controller
 
     public function store(StorePremiumRequest $request)
     {
-      $customer = Customer::create($request->validated());
-
+      $customer = auth()->user()->customers()->create($request->validated());
       $mobile= $customer->mobile()->create(
           [
               'mobile_name'=>$request->mobile_name,
@@ -44,66 +75,15 @@ class MobileController extends Controller
               'salary'=>$request->salary,
               'created_at'=>$request->created_at,
               'notes'=>$request->notes,
-              'date'=>$request->created_at
+              'date'=>$request->created_at,
+              'user_id'=>auth()->user()->id,
           ]);
 
         $mobile->customer()->update([
             'mobile_id'=>$mobile->id,
         ]);
 
-
-        return redirect()->route('customers.showPayments',$customer->id)->with(['success'=>'تمت الاضافة بنجاح']);
+        return redirect()->route('customers.showPayments',$customer->id)->withSuccessMessage(__('app.successfully_added'));
     }
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Mobile  $mobile
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Mobile $mobile)
-    {
-        //
-    }
-    public function showPayments($id)
-    {
-        $mobile = Mobile::with('mobile_payments')->find($id);
-        return view('admin.mobile.showPayments',compact('mobile'))->with('i');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mobile  $mobile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mobile $mobile)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Mobile  $mobile
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Mobile $mobile)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Mobile  $mobile
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Mobile $mobile)
-    {
-        //
-    }
 }

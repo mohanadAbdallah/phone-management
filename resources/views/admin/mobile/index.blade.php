@@ -33,56 +33,60 @@
                         <th class="text-center sorting_disabled" rowspan="1" colspan="1" data-column-index="5" aria-label="Actions" style="width: 100px;">@lang('app.address')</th>
                         <th class="text-center sorting_disabled" style="width: 17%" rowspan="1" colspan="1" data-column-index="5" aria-label="Actions" style="width: 100px;">@lang('app.remain')</th>
                         <th class="text-center sorting_disabled" style="width: 20%" rowspan="1" colspan="1" data-column-index="5" aria-label="Actions" style="width: 100px;">@lang('app.mobile')</th>
+                        <th class="text-center sorting_disabled" style="width: 20%" rowspan="1" colspan="1" data-column-index="5" aria-label="Actions" style="width: 100px;">@lang('app.status')</th>
                         <th class="text-center sorting_disabled" rowspan="1" colspan="1" data-column-index="5" aria-label="Actions" style="width: 100px;">@lang('app.actions')</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    @foreach($customer as $item)
+                    @foreach($mobile as $item)
                         <tr role="row" class="odd">
                             <td >{{++$i}}</td>
                             <td style="width: 20%">
-                                <a href="{{route('customers.showPayments',$item->id)}}">
-                                    <span>{{$item->customer_name ?? '--'}}</span>
+                                <a href="{{route('customers.showPayments',$item->customer->id)}}">
+                                    <span>{{$item->customer->customer_name ?? '--'}}</span>
                                 </a>
 
                             </td>
-                            <td style="width:10%">{{$item->phone ?? '--'}}</td>
+                            <td style="width:10%">{{$item->customer->phone ?? '--'}}</td>
                             <td >
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#addressModal-{{$item->id}}">
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#addressModal-{{$item->customer->id}}">
                                     <span class="badge badge-secondary" style="font-size: 8px;">عرض العنوان </span>
                                 </a>
                             </td>
                             <td style="text-align: center">
 
-                                   <a href="{{route('customers.showPayments',$item->id)}}" style="color: black">
-                                            <span class="badge badge-success" style="background-color: #00860a; font-size: 10px;">{{$item->mobile->residual}}</span>
+                                   <a href="{{route('customers.showPayments',$item->customer->id)}}" style="color: black">
+                                            <span class="badge badge-success" style="background-color: #00860a; font-size: 10px;">{{$item->residual}}</span>
                                         </a>
 
                             </td>
                             <td>
                                 <ul>
-
-                                        <li> <a href="{{route('mobiles.show',$item->mobile->id)}}">
-                                            <span style="font-size: 12px;">{{$item->mobile->mobile_name ?? '--'}}</span>
+                                    <li>
+                                        <a href="{{route('mobiles.show',$item->id)}}">
+                                            <span style="font-size: 12px;">{{$item->mobile_name ?? '--'}}</span>
                                         </a>
                                     </li>
-                                    </ul>
+                                </ul>
+                            </td>
+                            <td>
+                                <span class="{{$item->status_color}}">{{$item->status_name}}</span>
                             </td>
                             <td class="text-center" >
                                 <div class="list-icons">
-                                    <a href="{{route('customers.edit',$item->id)}}" class="list-icons-item">
-                                        <span class="badge badge-primary badge-pill">  <i class="icon-pencil7"></i></span>
+                                    <a href="{{route('customers.edit',$item->customer->id)}}" class="list-icons-item">
+                                        <span class="badge badge-secondary badge-pill">  <i class="icon-pencil7"></i></span>
 
                                     </a>
-                                    <a href="{{route('customers.show',$item->id)}}" class="list-icons-item">
-                                        <span class="badge badge-success badge-pill"><i class="icon-cog6"></i></span>
+                                    <a href="{{route('customers.show',$item->customer->id)}}" class="list-icons-item">
+                                        <span class="badge badge-primary badge-pill"><i class="icon-cog6"></i></span>
                                     </a>
 
                                 </div>
                             </td>
                         </tr>
-                        <div class="modal fade" id="addressModal-{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="addressModal-{{$item->customer->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -92,7 +96,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        {{$item->address}}
+                                        {{$item->customer->address}}
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">@lang('app.close')</button>

@@ -1,6 +1,18 @@
 <?php
 
   return [
+      // Sweet Alert
+      'successfully_added'=>'تمت الإضافة بنجاح',
+      'successfully_deleted'=>'تم الحذف بنجاح',
+      'success'=>'تمت العملية!',
+      'error'=>'فشل !!',
+      'warning'=>'تحذير !!',
+
+      //notification
+      'mark_all_as_read'=> 'تحديد الكل كمقروء',
+      'mark_as_read'=> 'تحديد كمقروء',
+      'there_are_no_new_notifications'=> 'لا يوجد هناك إشعارات جديدة',
+
     'dashboard' => 'لوحة التحكم',
     'orders' => 'الطلبات',
       'mobile'=>'جوال',
@@ -19,6 +31,13 @@
       'price_in_shekel'=>'السعر بالشيكل',
       'actions'=>'العملية',
       'required_premium'=>'الأقساط المستحقة',
+      'price_original'=>'السعر بالجملة',
+      'residual'=>'المتبقي',
+      'residual_salaries'=>'الرصيد المطلوب',
+      'shekel'=>'شيكل',
+      'overall_salaries'=>'الإجمالي',
+      'expired_premiums'=>'الأقساط المنتهية',
+      'expired'=>'منتهي',
 
 
       'services' => 'الخدمات',
@@ -358,7 +377,7 @@
     'total'  => 'المجموع',
 
     'new' => 'جديد',
-    'active' => 'مفعل',
+    'active' => 'فعال',
     'pending' => 'قيد المراجعة',
     'block'   => 'حظر',
     'addAttendance' => 'إضافة عقوبة',

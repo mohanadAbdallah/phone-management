@@ -46,43 +46,51 @@
                     <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0" id="alertsCount">0</span>
                 </a>
 
-                <div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
-                    <div class="dropdown-content-header">
-                        <span class="font-weight-semibold">@lang('app.notification')</span>
-                        <a href="#" class="text-default"><i class="icon-bell2"></i></a>
-                    </div>
+                <div class="dropdown-menu dropdown-menu-right " role="alert" aria-labelledby="navbarDropdownMenuLink">
+                    @isset($notifications)
 
-{{--                    <div class="dropdown-content-body dropdown-scrollable" id="notificationDropdown">--}}
-{{--                        <ul class=" notificationlist media-list" >--}}
-{{--                            @isset($alert)--}}
-{{--                            @foreach($alert as $item)--}}
-{{--                            <li class="media">--}}
-{{--                                <div class="mr-3 position-relative">--}}
-{{--                                    <img src="{{asset('global_assets/images/placeholders/notification.png')}}" width="36" height="36" class="rounded-circle" alt="">--}}
-{{--                                </div>--}}
+                    @if ($notifications->count() > 0 )
 
-{{--                                <div class="media-body">--}}
-{{--                                    <div class="media-title">--}}
-{{--                                        <a href="#">--}}
-{{--                                            <span class="font-weight-semibold">{{$item->shop->name}}</span>--}}
-{{--                                            <span class="text-muted float-right font-size-sm">{{ Carbon\Carbon::createFromTimeStamp(strtotime($item->created_at))->diffForHumans() }}</span>--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                    <span class="text-muted">{{$item->message}}</span>--}}
-{{--                                    <span class="text-muted">{{$item->shop->mobile}}</span>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                            @endforeach--}}
-{{--                            @endisset--}}
-{{--                                <div class="notificationlist">--}}
+                        @foreach($notifications->where('type','App\Notifications\requiredPaymentNotification') as $notification)
+                            <div class="alert alert-light" role="alert">
+                                <a href="{{route('customers.showPayments',$notification->data['customer_id'] ?? '')}}" style="color: black">
+                            <p class="dropdown-item" style="height:15px;">
 
-{{--                                </div>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
+                                    <b>دفعة مستحقة -- {{ $notification->data['mobile_name'] ?? '' }} - {{ $notification->data['customer_name'] ?? '' }}  </b>
+                                    &nbsp;[{{ $notification->created_at->format('Y-m-d') }}]
+                            </p>
+                                </a>
+                                <a href="#">
+                                </a>
+                            </div>
+                        @endforeach
+                        @foreach($notifications->where('type','App\Notifications\ExpiredMobileNotification') as $notification)
+                            <div class="alert alert-light" role="alert">
 
-                    <div class="dropdown-content-footer justify-content-center p-0">
-                        <a href="#" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="Load more"><i class="icon-menu7 d-block top-0"></i></a>
-                    </div>
+                                <p class="dropdown-item" style="height:15px;">
+
+                                    <b>
+                                        قسط منتهي --
+                                        بتاريخ :
+                                        [{{ $notification->created_at->format('Y-m-d') }}]
+                                        <b>الجوال  :</b>
+                                        {{ $notification->data['mobile_name'] ?? '' }} :-- <b>للزبون </b>
+                                        - {{ $notification->data['customer_name'] ?? '' }}  </b>
+
+                            </p>
+                                </a>
+                                <a href="#">
+                                </a>
+                            </div>
+                        @endforeach
+
+                        <a href="javascript:void(0);" class="dropdown-item" id="mark-all">
+                            @lang('app.mark_all_as_read')
+                        </a>
+                    @else
+                        <p class="dropdown-item">@lang('app.there_are_no_new_notifications')</p>
+                    @endif
+                    @endisset
                 </div>
             </li>
             <li class="nav-item dropdown dropdown-user">
@@ -106,85 +114,101 @@
         </ul>
     </div>
 </div>
+
 @section('script')
     <script>
-
-
         $(function() {
-            $(document).on('click' , '#notificationDropdown' , function(e) {
-                e.preventDefault();
+            $('#notificationDropdown').click(function (){
+                    $('#alertsCount').text(0);
 
-                // alert('Yes');
+                })
+            });
 
-                var base_url = '{{ url('make/NotificationRead/') }}';
+            var alerts_url = '{{ url('get/Unread/Notification') }}' + '/' + 1;
+            var csrftoken = $('meta[name="csrf-token"]').attr('content');
 
-                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-                $.ajax({
-                    type: 'get',
-                    url: base_url,
-                    dataType: "json",
-                    data: {
-                        _token: CSRF_TOKEN,
-                    },
-                    success: function(data) {
-                        $('#alertsCount').text(0);
+            $.ajax({
+                type: 'get',
+                url: alerts_url,
+                dataType: "json",
+                cache: false,
+                data: {
+                    _token: csrftoken,
+                },
+                success: function(data) {
+                    if(data.count !== 0){
+                        $('#alertsCount').text(data.count);
                     }
-
-
-                });
-                console.log($('#alertsCount'));
+                    console.log(data);
+                }
             });
 
 
 
-            setInterval(() => {
-                var alerts_url = '{{ url('get/Unread/Notification') }}' + '/' + 1;
-                var csrftoken = $('meta[name="csrf-token"]').attr('content');
-
-                $.ajax({
-                    type: 'get',
-                    url: alerts_url,
-                    dataType: "json",
-                    cache: false,
-                    data: {
-                        _token: csrftoken,
-                    },
-                    success: function(data) {
-                        if (data.count != 0) {
-
-                            $notify = "{{asset('global_assets/sound/notifyy.mp3')}}";
-                            var audioElement = document.createElement('audio');
-                            audioElement.setAttribute('src', $notify);
-
-                            $('.notificationlist').empty();
-                            data.notifications.forEach(notifications => {
-                                var str = notifications.message.substring(0,40);
-                                var text = '<a class="dropdown-item text-center  p-1" href="javascript:void(0);">' +
-                                    '<div class="notification-list ">'+
-                                    '<div class="notification-item position-relative  mb-3">'+
-                                    '<span class="mb-1">'+ str + '</span>'+
-                                    '</div>'+
-                                    '</div>'+
-                                    '</a>';
-                                $('.notificationlist').append(text);
-
-                            });
-
-                            audioElement.play();
-                            $('#alertsCount').text(data.count);
-                            audioElement.stop()
-                        }
-
-
-                        console.log(data);
-                    },
-                    error: function(data) {
-                        console.log(data);
-                    }
+            $('.mark-as-read').click(function() {
+                let request = sendMarkRequest($(this).data('id'));
+                request.done(() => {
+                    $(this).parents('div.alert').remove();
                 });
+            });
+            $('#mark-all').click(function() {
+                let request = sendMarkRequest();
+                request.done(() => {
+                    $('div.alert').remove();
+                })
 
-            }, 10000);
         });
+
+
+
+        function sendMarkRequest(id = null) {
+            return $.ajax("{{ route('admin.markNotification') }}", {
+                method: 'POST',
+
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id
+                }
+            });
+        }
+
+
     </script>
 @endsection
+
+{{--@section('script')--}}
+{{--    <script>--}}
+
+
+{{--        $(function() {--}}
+{{--            $(document).on('click' , '#notificationDropdown' , function(e) {--}}
+{{--                e.preventDefault();--}}
+
+{{--                // alert('Yes');--}}
+
+{{--                var base_url = '{{ url('make/NotificationRead/') }}';--}}
+
+{{--                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
+
+{{--                $.ajax({--}}
+{{--                    type: 'get',--}}
+{{--                    url: base_url,--}}
+{{--                    dataType: "json",--}}
+{{--                    data: {--}}
+{{--                        _token: CSRF_TOKEN,--}}
+{{--                    },--}}
+{{--                    success: function(data) {--}}
+{{--                        $('#alertsCount').text(0);--}}
+{{--                    }--}}
+
+
+{{--                });--}}
+{{--                console.log($('#alertsCount'));--}}
+{{--            });--}}
+
+
+
+{{--            --}}
+{{--        });--}}
+{{--    </script>--}}
+{{--@endsection--}}

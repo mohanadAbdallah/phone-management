@@ -1,6 +1,19 @@
 <?php
 
 return [
+    //sweet alert
+
+    'success'=>'Success!',
+    'error'=>'Error !!',
+    'warning'=>'Warning !!',
+    'successfully_added'=>'Successfully Added ',
+    'successfully_deleted'=>'Successfully Deleted',
+
+    //
+    'mark_all_as_read' =>'Mark all as read',
+    'mark_as_read' =>'Mark as read',
+    'there_are_no_new_notifications' =>'There are no new notifications',
+
     'dashboard' => 'Dashboard',
     'mobiles' => 'Mobiles',
     'remain'=>'Remain',
@@ -16,6 +29,13 @@ return [
     'identity'=>'ID. No',
     'actions'=>'Actions',
     'required_premium'=>'Required Premium',
+    'price_original'=>'Price Original',
+    'residual'=>'Residual',
+    'residual_salaries'=>'Residual Required Salaries',
+    'shekel'=>'Shekel',
+    'overall_salaries'=>'Overall Salaries',
+    'expired_premiums'=>'Expired Premiums',
+    'expired'=>'Expired',
 
     'orders' => 'Orders',
     'services' => 'Services',

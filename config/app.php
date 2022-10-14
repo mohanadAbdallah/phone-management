@@ -163,6 +163,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         LaravelFCM\FCMServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
 
         /*
@@ -236,6 +239,9 @@ return [
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+
+
 
 
 

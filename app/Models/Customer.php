@@ -37,4 +37,16 @@ class Customer extends Authenticatable
         }
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+
+    }
+    public function scopeUserCustomers($q, $id = null)
+    {
+        $id = $id ?? auth()->user()->id;
+        return $q->where('user_id', $id);
+    }
+
+
 }

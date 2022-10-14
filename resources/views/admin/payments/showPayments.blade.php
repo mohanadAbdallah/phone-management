@@ -3,6 +3,7 @@
 
 @section('content')
     @include('includes.messages')
+    @include('sweetalert::alert')
 
     <div class="card-header header-elements-inline">
         <div class="header-elements">
@@ -73,9 +74,6 @@
 
                             <td class="text-center" >
                                 <div class="list-icons">
-                                    <a href="javascript:void(0)"  data-toggle="modal" data-target="#edit" class="list-icons-item">
-                                        <span class="badge badge-primary badge-pill">  <i class="icon-pencil7"></i></span>
-                                    </a>
 
                                     <a class="list-icons-item" data-placement="top" title="Delete"
                                        href="javascript:void(0)"
@@ -144,6 +142,7 @@
             <a href="{{route('mobiles.index')}}" class="btn btn-danger" style="margin-@lang('app.dir2'): 5px;float: @lang('app.dir2');">@lang('app.back')</a>
         </div>
     </div>
+
     </form>
 
     <!--DELETE Modal -->
@@ -174,6 +173,7 @@
             </div>
             <!-- /.modal-content -->
         </div>
+     </div>
         <!-- /.modal-dialog -->
 
         <script>

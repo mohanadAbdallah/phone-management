@@ -64,10 +64,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
         //setting
         Route::resource('setting',SettingController::class);
 
+        Route::get('/send_notification', [PaymentsController::class,'send_notification'])->name('make.send_notification');
 
         // ajax request Notification
-        Route::get('make/NotificationRead', [ReservationController::class,'makeNotificationRead'])->name('make.NotificationRead');
-        Route::get('get/Unread/Notification/{id}', [ReservationController::class,'getUnreadNotification'])->name('get.Unread.Notification');
+//        Route::get('make/NotificationRead', [ReservationController::class,'makeNotificationRead'])->name('make.NotificationRead');
+        Route::get('get/Unread/Notification/{id}', [MobileController::class,'getUnreadNotification'])->name('get.Unread.Notification');
+
+        Route::get('/notification', [MobileController::class,'showNotificaton']);
+        Route::post('/mark-as-read',[MobileController::class, 'markNotification'])->name('admin.markNotification');
 
     });
 

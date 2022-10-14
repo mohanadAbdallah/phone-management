@@ -2,41 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Branch;
-use App\Models\Brand;
-use App\Models\City;
 use App\Models\Customer;
-use App\Models\Reservation;
+use App\Models\Mobile;
 use App\Models\User;
-use App\Models\Vehicle;
-use App\Models\VehicleType;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use http\Env\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
+        $notifications = auth()->user()->unreadNotifications;
+
         $data = [
-            'customer'=>Customer::get()->count(),
-            'users'=>User::get()->count()
+            'customer'=>Customer::UserCustomers()->count(),
+            'mobile'=>Mobile::UserMobiles()->where('status',0)->count(),
+            'total'=>Mobile::UserMobiles()->where('status',0)->sum('salary'),
+            'expired_premiums'=>Mobile::UserMobiles()->where('status',1)->get()->count(),
+            'residual'=>Mobile::UserMobiles()->get()->sum('residual'),
+            'required_payments'=>Mobile::UserMobiles()->with('mobile_payments')
+                ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
+                ->get()->count(),
             ];
 
-        return view('home' )->with($data);
+
+        return view('home',compact('notifications'))->with($data);
+
+    }
+
+    public function markNotification(Request $request)
+    {
+        auth()->user()->unreadNotification
+            ->when($request->input('id'),function ($query) use ($request){
+                return $query->where('id',$request->input('id'));
+            })->markAsRead();
+        return response()->noContent();
 
     }
 }

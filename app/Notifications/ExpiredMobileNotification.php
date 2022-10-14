@@ -7,18 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserNotification extends Notification
+class ExpiredMobileNotification extends Notification
 {
     use Queueable;
+    public $mobile;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($mobile)
     {
-        $this->user =$user;
+        $this->mobile = $mobile;
     }
 
     /**
@@ -35,8 +36,8 @@ class UserNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'name'=>$this->user->name,
-            'email'=>$this->user->email,
+            'mobile_name'=>$this->mobile->mobile_name,
+            'customer_name'=>$this->mobile->customer->customer_name
         ];
     }
 }

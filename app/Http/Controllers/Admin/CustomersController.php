@@ -8,6 +8,8 @@ use App\Models\Customer;
 use App\Models\Mobile;
 use App\Models\mobile_payment;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomersController extends Controller
 {
@@ -19,15 +21,10 @@ class CustomersController extends Controller
 
     public function index(Request $request)
     {
-        $customer = Customer::with('mobile')->get();
+        $customer = Customer::UserCustomers()->with('mobile')->get();
         return view('admin.customers.index',compact('customer'))->with('i');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.customers.create');
@@ -48,28 +45,16 @@ class CustomersController extends Controller
     public function showPayments($id)
     {
         $customer = Customer::with('mobile')->find($id);
+
         return view('admin.payments.showPayments',compact('customer'))->with('i');
     }
 
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $customer = Customer::find($id);
         return view('admin.customers.edit',compact('customer'));
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
 
@@ -79,13 +64,6 @@ class CustomersController extends Controller
     return redirect()->route('mobiles.index')->with('success','تم التعديل بنجاح');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Customer::find($id)->delete();
