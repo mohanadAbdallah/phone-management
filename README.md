@@ -8,8 +8,9 @@
 - Ordinal user Account > that has his own gate to manage his data and customers.
 
 ### How to get started with the project ?
-- clone the prpoject .
-use the seedered account for super admin 
-> email : admin@gmail.com
-> password : 123123123
+- clone the project .
+- use the seedered account for super admin 
+
+> email : admin@gmail.com  ||  password : 123123123
+
 - and you can register your users accounts.
