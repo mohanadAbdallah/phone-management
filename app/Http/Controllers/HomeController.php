@@ -13,18 +13,25 @@ class HomeController extends Controller
     public function index()
     {
         $notifications = auth()->user()->unreadNotifications;
-
-        $data = [
-            'users'=>User::all()->count(),
-            'customer'=>Customer::UserCustomers()->count(),
-            'mobile'=>Mobile::UserMobiles()->where('status',0)->count(),
-            'total'=>Mobile::UserMobiles()->where('status',0)->sum('salary'),
-            'expired_premiums'=>Mobile::UserMobiles()->where('status',1)->get()->count(),
-            'residual'=>Mobile::UserMobiles()->get()->sum('residual'),
-            'required_payments'=>Mobile::UserMobiles()->with('mobile_payments')
-                ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
-                ->get()->count(),
+        $data = [];
+        if (auth()->user()->hasRole('User')){
+            $data = [
+                'customer'=>Customer::UserCustomers()->count(),
+                'mobile'=>Mobile::UserMobiles()->where('status',0)->count(),
+                'total'=>Mobile::UserMobiles()->where('status',0)->sum('salary'),
+                'expired_premiums'=>Mobile::UserMobiles()->where('status',1)->get()->count(),
+                'residual'=>Mobile::UserMobiles()->get()->sum('residual'),
+                'required_payments'=>Mobile::UserMobiles()->with('mobile_payments')
+                    ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
+                    ->get()->count(),
             ];
+        }
+        elseif (auth()->user()->hasRole('Super_Admin')){
+            $data = [
+                'users'=>User::all()->count(),
+                ];
+        }
+
 
 
         return view('home',compact('notifications'))->with($data);

@@ -80,7 +80,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required',
-            'phone' => 'required|unique:users,phone',
+            'phone' => 'required',
 
 
         ]);

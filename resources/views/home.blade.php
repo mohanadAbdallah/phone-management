@@ -76,7 +76,7 @@
                 <div class="card card-body bg-success-400 has-bg-image">
                     <div class="media">
                         <div class="media-body ">
-                            <h3 class="mb-0">{{$customer}}</h3>
+                            <h3 class="mb-0">{{$customer ?? ''}}</h3>
                             <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.customers')</span>
                         </div>
 
@@ -90,7 +90,7 @@
                 <div class="card card-body bg-danger-400 has-bg-image">
                     <div class="media">
                         <div class="media-body">
-                            <h3 class="mb-0">{{$mobile}}</h3>
+                            <h3 class="mb-0">{{$mobile ?? ''}}</h3>
                             <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.mobiles')</span>
                         </div>
 

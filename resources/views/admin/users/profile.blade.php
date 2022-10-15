@@ -35,7 +35,7 @@
 
                             <div class="form-group">
                                 <label class=" font-size-lg control-label" for="mobile">@lang('app.phone')</label>
-                                <input type="text" class="form-control" id="mobile" name="mobile" value="{{$user->phone}}">
+                                <input type="text" class="form-control" id="phone" name="phone" value="{{$user->phone}}">
                             </div>
 
                             <div class="form-group">

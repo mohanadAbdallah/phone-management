@@ -34,7 +34,7 @@
                         </div>
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">@lang('app.phone')</label>
-                            <input type="text" class="form-control" placeholder=" @lang('app.phone')" name="mobile" value="{{$user->mobile}}"/>
+                            <input type="text" class="form-control" placeholder=" @lang('app.phone')" name="mobile" value="{{$user->phone}}"/>
                         </div>
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">@lang('app.password')</label>
