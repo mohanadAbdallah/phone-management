@@ -70,6 +70,7 @@
         <!-- Basic card -->
     <div class="content">
 
+        @role('User')
         <div class="row mt-5">
             <div class="col-sm-6 col-xl-4">
                 <div class="card card-body bg-success-400 has-bg-image">
@@ -153,6 +154,29 @@
             </div>
 
         </div>
+        @endrole
+
+        @role('Super_Admin')
+        <div class="row mt-5">
+            <div class="col-sm-6 col-xl-4">
+                <div class="card card-body bg-success-400 has-bg-image">
+                    <div class="media">
+                        <div class="media-body ">
+                            <h3 class="mb-0">{{$users}}</h3>
+                            <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.users')</span>
+                        </div>
+
+                        <div class="mr-3 align-self-center">
+                            <i class="icon-users4 icon-3x opacity-75"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        @endrole
+
     </div>
     <div class="card">
         <div class="card-header">

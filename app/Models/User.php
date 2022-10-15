@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
     protected $appends=['total_salaries'];
@@ -46,10 +47,10 @@ class User extends Authenticatable
     public function getTotalSalaries()
     {
         $total = 0;
-        foreach (Mobile::all() as $salary) {
+        foreach (Mobile::all() ?? [] as $salary) {
             $total += $salary->salary;
         }
-        return $total;
+        return $total ?? null;
     }
 
     public function customers()

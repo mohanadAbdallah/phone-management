@@ -44,17 +44,6 @@
                             <label for="exampleFormControlInput1" class="required form-label">@lang('app.repassword')</label>
                             <input type="password" class="form-control" placeholder="@lang('app.repassword')" name="confirm-password"/>
                         </div>
-                        <div class="form-group ">
-                            <label class="col-form-label col-lg-2">@lang('app.cities')</label>
-                            <div class="col-lg-16">
-                                <select class="form-control" name="city_id">
-                                    <option value="{{$user->city_id}}" {{$user->city_id ? 'selected' : ''}}>{{$user->city->name??'N/A'}}</option>
-                                    @foreach($city as $item)
-                                        <option value="{{$item->id}}">{{$item->name??'N/A'}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlInput1" class="required form-label">@lang('app.role')</label>

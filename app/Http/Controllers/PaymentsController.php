@@ -51,7 +51,7 @@ class PaymentsController extends Controller
 
         $mobile->update(['date'=>$request->created_at]);
 
-        if ($mobile->getresidual <= 0){
+        if ($mobile->residual <= 0){
             auth()->user()->notify(new ExpiredMobileNotification($mobile));
         }
 

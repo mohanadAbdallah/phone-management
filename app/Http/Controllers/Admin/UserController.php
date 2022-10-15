@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 
 class UserController extends Controller
@@ -61,7 +62,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::pluck('name','name')->all();
+        return view('admin.users.create',compact('roles'));
     }
 
     /**
@@ -78,7 +80,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required',
-            'mobile' => 'required|unique:users,mobile',
+            'phone' => 'required|unique:users,phone',
 
 
         ]);
@@ -113,12 +115,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $city = City::get();
+
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
-        return view('admin.users.edit',compact('user','roles','userRole','city'));
+        return view('admin.users.edit',compact('user','roles','userRole'));
     }
 
     /**

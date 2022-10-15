@@ -41,6 +41,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
     Route::group(['middleware' => ['auth']], function() {
         //user
         Route::resource('users',UserController::class);
+
+        Route::resource('roles',RoleController::class);
+
         Route::get('/show/profile', [UserController::class, 'showProfile'])->name('show.profile');
         Route::post('/update/profile', [UserController::class, 'updateProfile'])->name('update.profile');
 

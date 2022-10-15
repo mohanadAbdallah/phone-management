@@ -62,12 +62,8 @@
                         <span>@lang('app.dashboard')</span>
                     </a>
                 </li>
-                @can('control_notifications')
-                <li class="nav-item" >
-                    <a href="{{route('notifications.index')}}" class="font-size-lg  nav-link {{request()->routeIs('notifications.*')?'nav-link active' :'' }}"><i class="icon-bell2"></i><span>@lang('app.notifications')</span></a>
-                </li>
-                @endcan
 
+                @role('User')
                 <li class="nav-item" >
                     <a href="{{route('mobiles.index')}}" class="font-size-lg  nav-link {{request()->routeIs('mobiles.*')?'nav-link active' :'' }}"><i class="icon-mobile"></i><span>@lang('app.premiums')</span></a>
                 </li>
@@ -78,11 +74,20 @@
                 <li class="nav-item">
                     <a href="{{route('payments.required')}}" class=" font-size-lg nav-link {{request()->routeIs('payments.*')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.required_premium')</span></a>
                 </li>
-
+                @endrole
+                @role('Super_Admin')
+                <li class="nav-item" >
+                    <a href="{{route('users.index')}}" class="font-size-lg  nav-link {{request()->routeIs('users.*')?'nav-link active' :'' }}"><i class="icon-users4"></i><span>@lang('app.manege_users')</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('roles.index')}}" class="font-size-lg  nav-link {{request()->routeIs('roles.*')?'nav-link active' :'' }}"><i class="icon-lock2"></i> <span>@lang('app.roles')</span></a>
+                </li>
+                @endrole
                 <li class="nav-item" >
 
                     <a href="{{route('show.profile')}}" class="font-size-lg  nav-link {{request()->routeIs('setting.*')?'nav-link active' :'' }}"><i class="icon-gear"></i><span>@lang('app.settings')</span></a>
                 </li>
+
 
 
 

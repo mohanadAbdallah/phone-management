@@ -9,11 +9,14 @@ return [
     'successfully_added'=>'Successfully Added ',
     'successfully_deleted'=>'Successfully Deleted',
 
-    //
+    //notifications
+
     'mark_all_as_read' =>'Mark all as read',
     'mark_as_read' =>'Mark as read',
     'there_are_no_new_notifications' =>'There are no new notifications',
 
+    //roles
+    'role_name'=>'Role Name',
     'dashboard' => 'Dashboard',
     'mobiles' => 'Mobiles',
     'remain'=>'Remain',
@@ -98,6 +101,7 @@ return [
     'add_car' => 'Add Car',
     'notifications' => 'Notifications',
     'users' => 'USERS',
+    'manege_users' => 'Manege Users',
     'account_settings' => 'Account Settings',
     'logout' => 'logout',
     'Remember'=>'Remember',

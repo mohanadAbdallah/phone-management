@@ -15,6 +15,7 @@ class HomeController extends Controller
         $notifications = auth()->user()->unreadNotifications;
 
         $data = [
+            'users'=>User::all()->count(),
             'customer'=>Customer::UserCustomers()->count(),
             'mobile'=>Mobile::UserMobiles()->where('status',0)->count(),
             'total'=>Mobile::UserMobiles()->where('status',0)->sum('salary'),

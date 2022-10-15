@@ -106,9 +106,6 @@
                             <span class="px-2">@lang('app.Dont_have_an_account')</span>
                         </div>
 
-                        <div class="form-group">
-                            <a href="{{ route('register') }}" class="btn btn-light btn-block">@lang('app.register')</a>
-                        </div>
                     </div>
                 </div>
             </form>

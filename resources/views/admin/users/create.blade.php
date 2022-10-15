@@ -35,7 +35,7 @@
                         </div>
                         <div class="mb-10">
                             <label for="exampleFormControlInput1" class="required form-label">@lang('app.phone')</label>
-                            <input type="text" class="form-control rounded-round" placeholder=" @lang('app.phone')" name="mobile"/>
+                            <input type="text" class="form-control rounded-round" placeholder=" @lang('app.phone')" name="phone"/>
                         </div>
 
                         <div class="mb-10">
@@ -46,16 +46,7 @@
                             <label for="exampleFormControlInput1" class="required form-label">@lang('app.repassword')</label>
                             <input type="password" class="form-control rounded-round" placeholder="@lang('app.repassword')" name="confirm-password"/>
                         </div>
-                        <div class="form-group ">
-                            <label class="col-form-label col-lg-2">@lang('app.cities')</label>
-                            <div class="col-lg-16">
-                                <select class="form-control" name="city_id">
-                                    @foreach($city as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label for="exampleFormControlInput1" class="required form-label">@lang('app.role')</label>
                             <select name="roles[]" multiple="multiple" data-placeholder="Select a State..." class="form-control form-control-lg select" data-container-css-class="select-lg" data-fouc>

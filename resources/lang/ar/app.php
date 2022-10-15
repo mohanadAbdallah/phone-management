@@ -13,6 +13,8 @@
       'mark_as_read'=> 'تحديد كمقروء',
       'there_are_no_new_notifications'=> 'لا يوجد هناك إشعارات جديدة',
 
+      //roles
+      'role_name'=>'إسم الصلاحية',
     'dashboard' => 'لوحة التحكم',
     'orders' => 'الطلبات',
       'mobile'=>'جوال',
@@ -48,6 +50,7 @@
       'type_rental'=>'نوع الاستئجار',
       'notifications' => 'الاشعارات',
       'users' => 'المستخدمين ',
+      'manege_users' => 'إدارة المستخدمين ',
       'account_settings' => 'إعدادت الحساب ',
       'settings' => 'الاعدادات',
      'social_media'=>'التواصل الاجتماعي',
