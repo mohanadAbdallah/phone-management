@@ -6,3 +6,6 @@
 #### This project has :
 - super Admin Account > to manage the wohle users accounts.
 - Ordinal user Account > that has his own gate to manage his data and customers.
+
+### How to get started with the project ?
+ git clone https://github.com/mohanadAbdallah/phone-management.git
