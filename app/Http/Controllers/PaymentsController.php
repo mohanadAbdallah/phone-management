@@ -61,7 +61,7 @@ class PaymentsController extends Controller
     public function requiredPayment()
     {
         $user = \App\Models\User::find(1);
-        $mobilePayments = Mobile::UserMobiles()->with('mobile_payments')
+        $mobilePayments = Mobile::UserActiveMobiles()->with('mobile_payments')
             ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
             ->get();
 

@@ -13,7 +13,9 @@ return [
 
     'mark_all_as_read' =>'Mark all as read',
     'mark_as_read' =>'Mark as read',
-    'there_are_no_new_notifications' =>'There are no new notifications',
+    'there_are_no_new_notifications' =>'There are no new notifications . ',
+    'there_are_no_new_notifications_about_required_payments' =>'There are no new notifications about required Payments . ',
+    'there_are_no_new_notifications_about_expired_payments' =>'There are no new notifications about expired Payments . ',
 
     //roles
     'role_name'=>'Role Name',

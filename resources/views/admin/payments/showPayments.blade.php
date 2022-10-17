@@ -1,6 +1,33 @@
 @extends('layouts.main')
 
+<style>
+    .hovertext {
+        position: relative;
+         }
 
+    .hovertext:before {
+        content: attr(data-hover);
+        visibility: hidden;
+        opacity: 0;
+        width: 140px;
+        background-color: #000000;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px 0;
+        transition: opacity 0.4s ease-in-out;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 110%;
+    }
+
+    .hovertext:hover:before {
+        opacity: 1;
+        visibility: visible;
+    }
+
+</style>
 @section('content')
     @include('includes.messages')
     @include('sweetalert::alert')
@@ -70,7 +97,11 @@
                                 <td>{{++$i}}</td>
                                 <td>{{$item->payment ?? '--'}}</td>
                                 <td>{{$item->description ?? '--'}}</td>
-                                <td>{{$item->created_at->format('Y-m-d') ?? '--'}}</td>
+                                <td>
+                                    <span class="hovertext" data-hover="{{$item->created_at->format('Y-m-d') ?? '--'}}">
+                                        {{\Carbon\Carbon::parse($item->created_at)->diffForHumans(\Carbon\Carbon::now(),null,false,2)}}
+                                    </span>
+                                </td>
 
                             <td class="text-center" >
                                 <div class="list-icons">

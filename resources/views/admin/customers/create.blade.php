@@ -71,9 +71,9 @@
                                 <div class="form-group row">
                                     <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.phone')</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('mobile')is-invalid @enderror" placeholder=" @lang('app.phone')"  name="phone"/>
-                                        @if ($errors->has('mobile'))
-                                            <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                                        <input type="text" class="form-control @error('phone')is-invalid @enderror" placeholder=" @lang('app.phone')"  name="phone"/>
+                                        @if ($errors->has('phone'))
+                                            <span class="text-danger">{{ $errors->first('phone') }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -82,7 +82,9 @@
                                     <div class="col-sm-8">
 
                                         <input type="text" class="form-control @error('address')is-invalid @enderror" placeholder="@lang('app.address')"   name="address"/>
-
+                                        @if ($errors->has('address'))
+                                            <span class="text-danger">{{ $errors->first('address') }}</span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">

@@ -44,6 +44,11 @@ class Mobile extends Model
         $id = $id ?? auth()->user()->id;
         return $q->where('user_id', $id);
     }
+    public function scopeUserActiveMobiles($q, $id = null)
+    {
+        $id = $id ?? auth()->user()->id;
+        return $q->where('user_id', $id)->where('status',0);
+    }
 
     public function getStatusNameAttribute()
     {

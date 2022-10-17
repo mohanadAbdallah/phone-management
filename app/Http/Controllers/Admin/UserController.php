@@ -92,7 +92,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success','User created successfully');
+            ->withSuccessMessage(__('app.successfully_added'));
     }
 
     /**
@@ -166,6 +166,6 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success','User deleted successfully');
+            ->withSuccessMessage(__('app.successfully_deleted'));
     }
 }

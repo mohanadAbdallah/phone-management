@@ -32,8 +32,9 @@ class CustomersController extends Controller
 
     public function store(storeCustomerRequest $request)
     {
-        Customer::create($request->validated());
-        return redirect()->route('customers.index')->with('success','تمت الإضافة بنجاح');
+
+        auth()->user()->customers()->create($request->validated());
+        return redirect()->route('customers.index')->withSuccessMessage(__('app.successfully_added'));
     }
 
     public function show($id)

@@ -105,7 +105,7 @@
                     <div class="media">
                         <div class="media-body ">
                             <h3 class="mb-0">
-                                {{$total}}
+                                {{$total ?? ''}}
                             </h3>
                             <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.overall_salaries')</span>
                         </div>
@@ -122,7 +122,7 @@
                     <div class="media">
                         <div class="media-body" style="">
                             <h6 class="media-title font-weight-semibold">@lang('app.required_premium')</h6>
-                            <h3><b> {{$required_payments}} </b></h3>
+                            <h3><b> {{$required_payments ?? ''}} </b></h3>
 
                         </div>
                     </div>
@@ -134,7 +134,7 @@
                     <div class="media">
                         <div class="media-body" style="">
                             <h6 class="media-title font-weight-semibold">@lang('app.residual_salaries')</h6>
-                            <h3><b>{{$residual}} @lang('app.shekel')</b></h3>
+                            <h3><b>{{$residual ?? ''}} @lang('app.shekel')</b></h3>
 
                         </div>
                     </div>
@@ -146,7 +146,7 @@
                     <div class="media">
                         <div class="media-body" style="">
                             <h6 class="media-title font-weight-semibold">@lang('app.expired_premiums')</h6>
-                            <h3><b>{{$expired_premiums}}</b></h3>
+                            <h3><b>{{$expired_premiums ?? ''}}</b></h3>
 
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                 <div class="card card-body bg-success-400 has-bg-image">
                     <div class="media">
                         <div class="media-body ">
-                            <h3 class="mb-0">{{$users}}</h3>
+                            <h3 class="mb-0">{{$users-1 ?? ''}}</h3>
                             <span class="text-uppercase font-size-xs font-weight-bold">@lang('app.users')</span>
                         </div>
 
@@ -206,7 +206,7 @@
                         </a>
                     @endif
                 @empty
-                  لا يوجد هناك إشعارات عن دفعات مستحقة .
+                  @lang('app.there_are_no_new_notifications_about_required_payments')
                 @endforelse
                 <hr>
                 @forelse($notifications->where('type','App\Notifications\ExpiredMobileNotification') as $notification)
@@ -225,7 +225,7 @@
                         </a>
                     @endif
                 @empty
-                    لا يوجد هناك إشعارات عن أقساط منتهية .
+                @lang('app.there_are_no_new_notifications_about_expired_payments')
                 @endforelse
         </div>
     </div>

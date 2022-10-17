@@ -3,6 +3,8 @@
 
 @section('content')
     <div class="card">
+        @include('includes.messages')
+        @include('sweetalert::alert')
         <div class="card-header header-elements-inline">
             <h2 class="card-title"><b>@lang('app.users')</b></h2>
             <div class="header-elements">

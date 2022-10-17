@@ -12,6 +12,8 @@
       'mark_all_as_read'=> 'تحديد الكل كمقروء',
       'mark_as_read'=> 'تحديد كمقروء',
       'there_are_no_new_notifications'=> 'لا يوجد هناك إشعارات جديدة',
+      'there_are_no_new_notifications_about_required_payments'=> 'لا يوجد هناك إشعارات عن دفعات مستحقة .',
+      'there_are_no_new_notifications_about_expired_payments'=> 'لا يوجد هناك إشعارات عن أقساط منتهية .',
 
       //roles
       'role_name'=>'إسم الصلاحية',
