@@ -21,7 +21,7 @@ class CustomersController extends Controller
 
     public function index(Request $request)
     {
-        $customer = Customer::UserCustomers()->with('mobile')->get();
+        $customer = Customer::UserCustomers()->get();
         return view('admin.customers.index',compact('customer'))->with('i');
     }
 

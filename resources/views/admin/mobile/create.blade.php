@@ -31,7 +31,7 @@
             @include('includes.messages')
 
             <!--begin::Form-->
-                <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form" novalidate="novalidate" method="post" action="{{route('mobiles.store')}}"enctype="multipart/form-data" >
+                <form class="form fv-plugins-bootstrap fv-plugins-framework" id="kt_form" novalidate="novalidate" method="post" action="{{route('mobiles.store')}}" >
                     @csrf
                <div class="card-header mb-3" style="background-color: #0b3251;color: #000000;">
                    <div class="row">

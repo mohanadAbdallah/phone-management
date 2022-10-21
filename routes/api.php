@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CustomersController;
+use App\Http\Controllers\MobileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Api\ReservationController;
@@ -18,16 +20,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
 });
+Route::resource('customers',CustomersController::class);
 
 Route::group(['middleware' => ['localization'] , 'prefix' => 'v1'] , function() {
 
-    Route::post('/customer/register', [\App\Http\Controllers\Api\Auth\RegisterController::class, 'register'])->name('customer.register');
-    Route::post('/customer/login', [\App\Http\Controllers\Api\Auth\LoginController::class, 'login'])->name('customer.login');
-    Route::post('/customer/socialite/login', [\App\Http\Controllers\Api\Auth\LoginController::class, 'socialiteLoginCustomer'])->name('customer.socialite.login');
-    Route::post('/customer/send/otp/code', [\App\Http\Controllers\Api\CustomersController::class, 'sendOtpCode'])->name('verify.Otp.Code');
-    Route::post('/customer/verify/otp/code', [\App\Http\Controllers\Api\CustomersController::class, 'verifyOtpCode'])->name('verify.otp.code');
-    Route::get('/customer/get/question', [\App\Http\Controllers\Api\CustomersController::class, 'getQuestion'])->name('get.question');
-    Route::post('/customer/verify/question', [\App\Http\Controllers\Api\CustomersController::class, 'verifyQuestion'])->name('verify.question');
+//    Route::post('/customer/register', [\App\Http\Controllers\Api\Auth\RegisterController::class, 'register'])->name('customer.register');
+//    Route::post('/customer/login', [\App\Http\Controllers\Api\Auth\LoginController::class, 'login'])->name('customer.login');
+//    Route::post('/customer/socialite/login', [\App\Http\Controllers\Api\Auth\LoginController::class, 'socialiteLoginCustomer'])->name('customer.socialite.login');
+//    Route::post('/customer/send/otp/code', [\App\Http\Controllers\Api\CustomersController::class, 'sendOtpCode'])->name('verify.Otp.Code');
+//    Route::post('/customer/verify/otp/code', [\App\Http\Controllers\Api\CustomersController::class, 'verifyOtpCode'])->name('verify.otp.code');
+//    Route::get('/customer/get/question', [\App\Http\Controllers\Api\CustomersController::class, 'getQuestion'])->name('get.question');
+//    Route::post('/customer/verify/question', [\App\Http\Controllers\Api\CustomersController::class, 'verifyQuestion'])->name('verify.question');
 
 //Setting
     Route::get('/get/setting/data', [\App\Http\Controllers\Api\SettingController::class, 'getData'])->name('get.setting');

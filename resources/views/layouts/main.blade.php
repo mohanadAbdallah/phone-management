@@ -31,5 +31,10 @@
         </body>
         @yield('script')
         @yield('js_css_header')
+        <style>
+            body{
+                font-family: 'Droid Arabic Kufi', serif;
+            }
+        </style>
         </html>
 
