@@ -35,6 +35,10 @@
             body{
                 font-family: 'Droid Arabic Kufi', serif;
             }
+            .sidebar-main, .sidebar-main .sidebar-content, .sidebar-secondary, .sidebar-secondary .sidebar-content {
+                right: -18.5625rem;
+                font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
+            }
         </style>
         </html>
 

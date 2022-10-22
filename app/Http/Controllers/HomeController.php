@@ -23,6 +23,7 @@ class HomeController extends Controller
                 'residual'=>Mobile::UserMobiles()->get()->sum('residual'),
                 'required_payments'=>Mobile::UserMobiles()->with('mobile_payments')
                     ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
+                    ->where('status', '=',0)
                     ->get()->count(),
             ];
         }

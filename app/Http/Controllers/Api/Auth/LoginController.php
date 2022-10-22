@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Helpers\Validate;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -16,19 +17,18 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'mobile' => 'required',
+            'phone' => 'required',
             'password' => 'required|min:6',
         ];
         $validator = Validate::validateRequest($request, $rules);
         if ($validator != 'valid') return $validator;
 
-        $customer = Customer::where('mobile', $request->mobile)->first();
-        if ($customer) {
-            $customer-> user_agent=$request->user_agent;
-            $customer->save();
-            if (Hash::check($request->password, $customer->password)) {
-                $token = $customer->createToken('TripleQ Registration token')->plainTextToken;
-                return response()->json(['data' => $customer, 'token' => $token, 'status' => true, 'message' => 'success'], 200);
+        $user = User::where('phone', $request->phone)->first();
+        if ($user) {
+            $user->save();
+            if (Hash::check($request->password, $user->password)) {
+                $token = $user->createToken('Registration token')->plainTextToken;
+                return response()->json(['data' => $user, 'token' => $token, 'status' => true, 'message' => 'success'], 200);
             }
         }
         return response()->json(['message' => 'invalid username or password', 'status' => false], 422);

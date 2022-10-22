@@ -14,7 +14,7 @@ class Mobile extends Model
     use HasFactory ,Notifiable;
     protected $fillable = ['mobile_name','type','salary','customer_id','created_at','date','status','user_id'];
 
-    protected $appends=['residual','total_salaries','status_name', 'status_color'];
+    protected $appends=['residual','status_name', 'status_color'];
 
     public function mobile_payments()
     {

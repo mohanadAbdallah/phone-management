@@ -25,7 +25,6 @@ class StorePremiumRequest extends FormRequest
     {
         return [
             'customer_name'=>'required',
-            'email'=>'required|email',
             'address'=>'required',
             'phone'=>'required|numeric',
             'identity'=>'required|numeric',

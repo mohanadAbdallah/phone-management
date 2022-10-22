@@ -44,7 +44,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function getTotalSalaries()
+    public function getTotalSalariesAttribute()
     {
         $total = 0;
         foreach (Mobile::all() ?? [] as $salary) {

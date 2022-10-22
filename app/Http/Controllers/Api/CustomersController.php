@@ -31,12 +31,16 @@ class CustomersController extends ApiController
             'phone' => 'required',
             'address' => 'required',
         ];
-        $this->validate($request , $rules);
-        $newCustomer = Customer::create($request->all());
+
+        $validator = Validate::validateRequest($request, $rules);
+
+        if ($validator != 'valid') return $validator;
+
+        $newCustomer = auth()->user()->customers()->create($request->all());
+
         return $this->showOne($newCustomer , 201 );
     }
 
-//
 //    public function verifyQuestion(Request $request){
 //
 //        $rules = [
