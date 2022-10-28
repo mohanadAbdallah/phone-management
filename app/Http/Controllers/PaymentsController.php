@@ -6,14 +6,7 @@ use App\Http\Requests\PaymentsRequest;
 use App\Models\Mobile;
 use App\Models\mobile_payment;
 use App\Notifications\ExpiredMobileNotification;
-use App\Notifications\requiredPaymentNotification;
 use Carbon\Carbon;
-use http\Client\Curl\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Session;
-use RealRashid\SweetAlert\Facades\Alert;
 
 
 class PaymentsController extends Controller
@@ -47,11 +40,14 @@ class PaymentsController extends Controller
     public function store(PaymentsRequest $request , $id)
     {
         $mobile=Mobile::with('mobile_payments')->find($id);
+        $resid = $mobile->residual - $request->payment;
+        $mobile->update(['residual'=>$resid]);
         $mobile->mobile_payments()->create($request->validated());
 
         $mobile->update(['date'=>$request->created_at]);
 
         if ($mobile->residual <= 0){
+            $mobile->update(['status'=>1]);
             auth()->user()->notify(new ExpiredMobileNotification($mobile));
         }
 
@@ -61,7 +57,7 @@ class PaymentsController extends Controller
     public function requiredPayment()
     {
         $user = \App\Models\User::find(1);
-        $mobilePayments = Mobile::UserActiveMobiles()->with('mobile_payments')
+        $mobilePayments = Mobile::UserActiveMobiles()->with('mobile_payments','customer')
             ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
             ->get();
 
@@ -78,10 +74,26 @@ class PaymentsController extends Controller
             ->get();
     }
 
+    public function deleteAllPayments(Mobile $mobile)
+    {
+        mobile_payment::where('mobile_id',$mobile->id)->delete();
 
+        return redirect()->back()->withSuccessMessage(__('app.successfully_deleted'));
+    }
     public function destroy($id)
     {
         $payment = mobile_payment::find($id);
+        $mobile = Mobile::where('id',$payment->mobile_id)->get();
+
+        foreach ($mobile as $item){
+           $resid = $item->residual + $payment->payment;
+
+            $item->update([
+                    'residual' => $resid,
+                    'status' => 0 ]
+            );
+        }
+
         $payment->delete();
         return redirect()->back()->withSuccessMessage(__('app.successfully_deleted'));
 

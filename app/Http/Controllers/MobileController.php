@@ -15,7 +15,7 @@ class MobileController extends Controller
 {
     public function index()
     {
-        $mobile = Mobile::UserMobiles()->with('customer')
+        $mobile = Mobile::UserMobiles()->with('customer','mobile_payments')
             ->orderBy('status','asc')->get();
 
         return view('admin.mobile.index',compact('mobile'))->with('i');
@@ -73,6 +73,7 @@ class MobileController extends Controller
               'mobile_name'=>$request->mobile_name,
               'type'=>$request->type,
               'salary'=>$request->salary,
+              'residual'=>$request->salary,
               'created_at'=>$request->created_at,
               'notes'=>$request->notes,
               'date'=>$request->created_at,

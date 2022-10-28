@@ -20,6 +20,8 @@
     'dashboard' => 'لوحة التحكم',
     'orders' => 'الطلبات',
       'mobile'=>'جوال',
+      'mobile_type'=>'نوع الجوال',
+      'date_of_buy'=>'تاريخ شراء الجوال',
       'mobiles'=>'الجوالات',
       'premiums'=>'الأقساط',
       'remain'=>'المتبقي',
@@ -228,7 +230,8 @@
     'view' => 'عرض',
     'edit' => 'تعديل',
     'delete' => 'حذف',
-   'confirm_delete_item' => 'تأكيد حذف العنصر',
+    'delete_all' => 'حذف الكل',
+   'confirm_delete_all' => 'تأكيد حذف الكل',
 
       'main_photo'=>'الصورة الرئيسية',
       'detailed_photo'=>'الصور التفصيلية',

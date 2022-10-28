@@ -54,10 +54,11 @@ Route::group(['middleware'=>['role:Super_Admin']],function (){
 
 
         //payments
-        Route::resource('payments', PaymentsController::class);
+       Route::resource('payments', PaymentsController::class);
         Route::post('{id}/payments',[PaymentsController::class,'store'])->name('payments.store');
         Route::post('{id}/payments/print', [CustomersController::class,'printPayments'])->name('payments.print');
         Route::get('requiredPayment',[PaymentsController::class,'requiredPayment'])->name('payments.required');
+        Route::delete('deleteAllPayments/{mobile}',[PaymentsController::class,'deleteAllPayments'])->name('payments.deleteAll');
 
 
         //Customer

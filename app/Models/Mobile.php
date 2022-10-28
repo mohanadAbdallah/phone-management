@@ -12,28 +12,28 @@ use Illuminate\Notifications\Notification;
 class Mobile extends Model
 {
     use HasFactory ,Notifiable;
-    protected $fillable = ['mobile_name','type','salary','customer_id','created_at','date','status','user_id'];
+    protected $fillable = ['mobile_name','type','salary','residual','customer_id','created_at','date','status','user_id'];
 
-    protected $appends=['residual','status_name', 'status_color'];
+    protected $appends=['status_name', 'status_color'];
 
     public function mobile_payments()
     {
         return $this->hasMany(mobile_payment::class);
     }
-    public function getResidualAttribute()
-    {
-        $residual = $this->salary;
-        $mobile = $this;
-        foreach ($this->mobile_payments as $mobile_payments) {
-            $residual -= $mobile_payments->payment;
-            if ($residual <= 0 ){
-                Mobile::update(['status'=>1]);
-            }else{
-                Mobile::update(['status'=>0]);
-            }
-        }
-        return $residual;
-    }
+//    public function getResidualAttribute()
+//    {
+//        $residual = $this->salary;
+//        $mobile = $this;
+//        foreach ($this->mobile_payments as $mobile_payments) {
+//            $residual -= $mobile_payments->payment;
+//            if ($residual <= 0 ){
+//                Mobile::update(['status'=>1]);
+//            }else{
+//                Mobile::update(['status'=>0]);
+//            }
+//        }
+//        return $residual;
+//    }
 
 
     public function customer(){
