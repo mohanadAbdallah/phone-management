@@ -62,7 +62,7 @@ class CustomersController extends Controller
         $customer = Customer::findOrfail($id);
         $customer->update($request->all());
 
-    return redirect()->route('mobiles.index')->with('success','تم التعديل بنجاح');
+    return redirect()->route('customers.show',$customer->id)->withSuccessMessage(__('app.successfully_edited'));
     }
 
     public function destroy($id)

@@ -19,12 +19,13 @@ class CreateCustomersTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->foreignId('mobile_id')->nullable();
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('address')->nullable();
             $table->string('identity')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->string('email_verified_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

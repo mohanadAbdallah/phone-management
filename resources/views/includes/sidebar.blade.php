@@ -74,6 +74,13 @@
                 <li class="nav-item">
                     <a href="{{route('payments.required')}}" class=" font-size-lg nav-link {{request()->routeIs('payments.*')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.required_premium')</span></a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('mobile.expired')}}" class=" font-size-lg nav-link {{request()->routeIs('mobile.expired')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.expired_mobile')</span></a>
+                </li>
+                <li class="nav-item" >
+
+                    <a href="{{route('setting.warning')}}" class="font-size-lg  nav-link {{request()->routeIs('setting.warning')?'nav-link active' :'' }}"><i class="icon-alert"></i><span>@lang('app.Warnings')</span></a>
+                </li>
                 @endrole
                 @role('Super_Admin')
                 <li class="nav-item" >
@@ -85,7 +92,7 @@
                 @endrole
                 <li class="nav-item" >
 
-                    <a href="{{route('show.profile')}}" class="font-size-lg  nav-link {{request()->routeIs('setting.*')?'nav-link active' :'' }}"><i class="icon-gear"></i><span>@lang('app.settings')</span></a>
+                    <a href="{{route('show.profile')}}" class="font-size-lg  nav-link {{request()->routeIs('show.profile')?'nav-link active' :'' }}"><i class="icon-gear"></i><span>@lang('app.settings')</span></a>
                 </li>
 
 

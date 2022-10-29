@@ -35,7 +35,7 @@ class HomeController extends Controller
 
 
 
-        return view('home',compact('notifications'))->with($data);
+            return view('home',compact('notifications'))->with($data);
 
     }
 

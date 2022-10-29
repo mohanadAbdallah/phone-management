@@ -13,13 +13,27 @@ use Illuminate\Support\Facades\DB;
 
 class MobileController extends Controller
 {
+
     public function index()
     {
+        $notifications = auth()->user()->unreadNotifications;
         $mobile = Mobile::UserMobiles()->with('customer','mobile_payments')
+            ->where('status',0)
             ->orderBy('status','asc')->get();
 
-        return view('admin.mobile.index',compact('mobile'))->with('i');
+        return view('admin.mobile.index',compact('mobile','notifications'))->with('i');
 
+    }
+    public function expired(){
+
+        $expired_premiums_salary = Mobile::UserMobiles()->where('status',1)
+        ->where('date', '>=', Carbon::now()->subMonths(6)->toDateTimeString())->sum('salary');
+
+        $mobile = Mobile::UserMobiles()->with('customer','mobile_payments')
+            ->where('status',1)
+            ->orderBy('status','asc')->get();
+
+        return view('admin.mobile.expired_mobile',compact('mobile','expired_premiums_salary'))->with('i');
     }
     public function showNotificaton()
     {

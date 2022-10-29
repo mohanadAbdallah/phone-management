@@ -53,7 +53,7 @@
 
                         @foreach($notifications->where('type','App\Notifications\requiredPaymentNotification') as $notification)
                             <div class="alert alert-light" role="alert">
-                                <a href="{{route('customers.showPayments',$notification->data['customer_id'] ?? '')}}" style="color: black">
+                                <a href="{{route('customers.showPayments',$notification->data['customer_id'] ?? '')}}" class="bell_notification" data-id="{{ $notification->id }}" style="color: black">
                             <p class="dropdown-item" style="height:15px;">
 
                                     <b>دفعة مستحقة -- {{ $notification->data['mobile_name'] ?? '' }} - {{ $notification->data['customer_name'] ?? '' }}  </b>
@@ -66,8 +66,7 @@
                         @endforeach
                         @foreach($notifications->where('type','App\Notifications\ExpiredMobileNotification') as $notification)
                             <div class="alert alert-light" role="alert">
-
-                                <p class="dropdown-item" style="height:15px;">
+                                <p class="dropdown-item bell_notification" data-id="{{ $notification->id }}" style="height:15px;">
 
                                     <b>
                                         قسط منتهي --
@@ -76,11 +75,7 @@
                                         <b>الجوال  :</b>
                                         {{ $notification->data['mobile_name'] ?? '' }} :-- <b>للزبون </b>
                                         - {{ $notification->data['customer_name'] ?? '' }}  </b>
-
                             </p>
-                                </a>
-                                <a href="#">
-                                </a>
                             </div>
                         @endforeach
 
@@ -117,6 +112,19 @@
 
 @section('script')
     <script>
+        function sendMarkRequest(id = null) {
+
+            return $.ajax("{{ route('admin.markNotification') }}", {
+
+                method: 'POST',
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "id": id
+
+                }
+            });
+        }
+
         $(function() {
             $('#notificationDropdown').click(function (){
                     $('#alertsCount').text(0);
@@ -143,14 +151,16 @@
                 }
             });
 
-
-
-            $('.mark-as-read').click(function() {
+            $('.bell_notification').click(function() {
                 let request = sendMarkRequest($(this).data('id'));
                 request.done(() => {
-                    $(this).parents('div.alert').remove();
+                    $(this).remove();
+                    $('.mark-as-read').remove();
+
                 });
+
             });
+
             $('#mark-all').click(function() {
                 let request = sendMarkRequest();
                 request.done(() => {
@@ -158,19 +168,6 @@
                 })
 
         });
-
-
-
-        function sendMarkRequest(id = null) {
-            return $.ajax("{{ route('admin.markNotification') }}", {
-                method: 'POST',
-
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id
-                }
-            });
-        }
 
 
     </script>

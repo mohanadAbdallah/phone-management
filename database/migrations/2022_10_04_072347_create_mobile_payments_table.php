@@ -15,12 +15,13 @@ class CreateMobilePaymentsTable extends Migration
     {
         Schema::create('mobile_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mobile_id')->nullable();
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('mobile_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('payment')->nullable();
             $table->text('description')->nullable();
             $table->integer('status')->nullable();
             $table->timestamps();
+
         });
     }
 

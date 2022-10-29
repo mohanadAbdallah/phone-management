@@ -15,7 +15,7 @@ class CreateMobilesTable extends Migration
     {
         Schema::create('mobiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->nullable();
+            $table->foreignId('customer_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('mobile_name')->nullable();
             $table->string('type')->nullable();
             $table->string('salary')->nullable();
@@ -23,8 +23,9 @@ class CreateMobilesTable extends Migration
             $table->text('notes')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->timestamp('date');
-            $table->foreignId('user_id')->nullable();
+            $table->foreignId('user_id')->nullable()->onDelete('cascade');;
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -4,6 +4,7 @@
       // Sweet Alert
       'successfully_added'=>'تمت الإضافة بنجاح',
       'successfully_deleted'=>'تم الحذف بنجاح',
+      'successfully_edited'=>'تم التعديل بنجاح',
       'success'=>'تمت العملية!',
       'error'=>'فشل !!',
       'warning'=>'تحذير !!',
@@ -23,8 +24,10 @@
       'mobile_type'=>'نوع الجوال',
       'date_of_buy'=>'تاريخ شراء الجوال',
       'mobiles'=>'الجوالات',
+      'expired_mobile'=>'الأقساط المنتهية',
       'premiums'=>'الأقساط',
       'remain'=>'المتبقي',
+      'Warnings'=>'الإخطارات',
       'add_premium'=>'إضافة قسط جديد ',
       'premium_details'=>'بيانات التقسيط',
       'customer_details'=>'بيانات الزبون',
@@ -43,6 +46,7 @@
       'shekel'=>'شيكل',
       'overall_salaries'=>'الإجمالي',
       'expired_premiums'=>'الأقساط المنتهية',
+      'expired_premiums_salary_in_six_month'=>'معدل الربح خلال ست شهور',
       'expired'=>'منتهي',
 
 
@@ -232,6 +236,7 @@
     'delete' => 'حذف',
     'delete_all' => 'حذف الكل',
    'confirm_delete_all' => 'تأكيد حذف الكل',
+   'confirm_delete_item' => 'تأكيد حذف العنصر',
 
       'main_photo'=>'الصورة الرئيسية',
       'detailed_photo'=>'الصور التفصيلية',

@@ -8,6 +8,7 @@ return [
     'warning'=>'Warning !!',
     'successfully_added'=>'Successfully Added ',
     'successfully_deleted'=>'Successfully Deleted',
+    'successfully_edited'=>'Successfully Edited',
 
     //notifications
 
@@ -160,6 +161,9 @@ return [
     'image'=>'Image',
     'number_of_visitors'=>'Number of Visitors',
     'mobile'=>'mobile',
+    'Warnings'=>'Warnings',
+    'expired_mobile'=>'Expired Mobiles',
+    'expired_premiums_salary_in_six_month'=>'Expired Premiums Salary in last 6 Month',
     'date_of_buy'=>'Date Of Buy',
     'tags' => 'Tags',
     'add_subcategory'=>'add sub category',

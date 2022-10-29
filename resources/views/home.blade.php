@@ -234,20 +234,13 @@
     @parent
     @if(auth()->user()->is_admin)
         <script>
-            function sendMarkRequest(id = null) {
-                return $.ajax("{{ route('admin.markNotification') }}", {
-                    method: 'POST',
-                    data: {
-                        _token,
-                        id
-                    }
-                });
-            }
+
             $(function() {
                 $('.mark-as-read').click(function() {
                     let request = sendMarkRequest($(this).data('id'));
                     request.done(() => {
-                        $(this).parents('div.alert').remove();
+                        $(this).remove();
+                        $('.bell_notification').parents('div.alert').remove();
                     });
                 });
                 $('#mark-all').click(function() {

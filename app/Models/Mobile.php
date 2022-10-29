@@ -6,12 +6,13 @@ use App\Notifications\ExpiredMobileNotification;
 use App\Notifications\requiredPaymentNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Notifications\Notification;
 
 class Mobile extends Model
 {
-    use HasFactory ,Notifiable;
+    use HasFactory ,Notifiable,SoftDeletes;
     protected $fillable = ['mobile_name','type','salary','residual','customer_id','created_at','date','status','user_id'];
 
     protected $appends=['status_name', 'status_color'];

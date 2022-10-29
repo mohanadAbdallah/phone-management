@@ -50,6 +50,7 @@ Route::group(['middleware'=>['role:Super_Admin']],function (){
         Route::post('/update/profile', [UserController::class, 'updateProfile'])->name('update.profile');
 
         //Mobiles
+        Route::get('expired',[MobileController::class,'expired'])->name('mobile.expired');
         Route::resource('mobiles',MobileController::class);
 
 
@@ -68,6 +69,9 @@ Route::group(['middleware'=>['role:Super_Admin']],function (){
         Route::get('print', [CustomersController::class, 'print'])->name('print');
 
         //setting
+        Route::get('warning',[SettingController::class,'warning'])->name('setting.warning');
+        Route::put('update_warning/{id}',[SettingController::class,'update_warning'])->name('setting.update_warning');
+
         Route::resource('setting',SettingController::class);
 
         Route::get('/send_notification', [PaymentsController::class,'send_notification'])->name('make.send_notification');

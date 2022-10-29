@@ -22,8 +22,12 @@ class Controller extends BaseController
             }
             return $next($request);
         });
-        $notifications = User::find(1)->unreadNotifications;
-        View::share('notifications', $notifications);
+
+        $this->middleware(function ($request, $next) {
+            $notifications = auth()->user()->unreadNotifications;
+            View::share('notifications', $notifications);
+            return $next($request);
+        });
 
     }
 }

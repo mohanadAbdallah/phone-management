@@ -1,78 +1,76 @@
 @extends('layouts.main')
 
-
+@section('js_css_header')
+    <script src="{{asset('portal/global_assets/js/plugins/editors/ckeditor-full/ckeditor.js')}}" type="text/javascript"></script>
+    <script src="{{asset('portal/global_assets/js/demo_pages/editor_ckeditor_default.js')}}" type="text/javascript"></script>
+@endsection
 @section('content')
 
-<div class="app-content content mt-md-0 mt-5">
-    <div class="content-wrapper">
-        <div class="content-body">
-            <!-- DOM - jQuery events table -->
-            <section id="dom">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title" style="font-size: 24px; color: #0a0e45;font-weight: bold">
-                                    <i class="ft-globe" style="font-size: 24px; color: #0a0e45"></i> سياسة الإستبدال والإسترجاع
-                                </h4>
-                                <a class="heading-elements-toggle"><i
-                                        class="la la-ellipsis-v font-medium-3"></i></a>
-                                <div class="heading-elements">
-                                    <ul class="list-inline mb-0">
-                                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                                        <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                                        <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                        <li><a data-action="close"><i class="ft-x"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
 
-                            <div class="card-content collapse show">
-                                <div class="card-body card-dashboard">
+    <div class="app-content content mt-md-0 mt-5">
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-10 col-12 mb-2">
+                    <h3 class="content-header-title"> إتصل بنا </h3>
+                    <div class="row breadcrumbs-top">
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{route('home')}}">الرئيسية</a>
+                                </li>
+                                <li class="breadcrumb-item active">نموذج الإخطار
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- DOM - jQuery events table -->
+                <section id="dom">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
 
-                                    <form class="rated"
-                                          action=""
-                                          method="post"
-                                          enctype="multipart/form-data">
-                                        @method('put')
+                                <div class="card-content collapse show">
+                                    <div class="card-body card-dashboard">
 
-                                        {{csrf_field()}}
-                                        <div class="row ">
-                                            <div class="col-12 ">
-                                                <div class="form-group">
-                                                    <label class="control-label" for="content_ar">المحتوى</label>
-                                                    <textarea  id="editor-full" rows="4" cols="4"
-                                                               name="text">{!! $data->text ?? '' !!}</textarea>
+                                        <form class="rated"
+                                              action="{{route('setting.update_warning',$data->id ?? 1)}}"
+                                              method="post"
+                                              enctype="multipart/form-data">
+                                            @method('put')
+                                            {{csrf_field()}}
+                                            <div class="row ">
+                                                <div class="col-12 ">
+                                                    <div class="form-group">
+                                                        <textarea  id="editor-full" rows="4" cols="4"
+                                                                   name="text">{!! $data->text ?? '' !!}</textarea>
+                                                    </div>
                                                 </div>
+
                                             </div>
 
+
+                                            <div class="form-group">
+
+                                                <button class="btn btn-success">حفظ التغييرات</button>
+
+                                            </div>
+
+                                        </form>
+                                        <div class="justify-content-center d-flex">
                                         </div>
-
-
-                                        <div class="form-group">
-
-                                            <button class="btn btn-success">حفظ التغييرات</button>
-
-                                        </div>
-
-                                    </form>
-                                    <form  action="">
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-danger mr-1">
-                                                للخلف
-                                            </button>
-                                        </div>
-
-                                    </form>
-                                    <div class="justify-content-center d-flex">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </div>
-</div>
+@endsection
+
+@section('scripts')
+
 @endsection

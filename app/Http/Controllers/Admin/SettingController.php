@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
 use App\Models\Setting;
+use App\Models\Warning;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -57,6 +59,25 @@ class SettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function warning()
+    {
+        $data = Warning::UserWarnings()->first();
+        return view('admin.settings.Warnings.paradigm',compact('data'));
+    }
+    public function update_warning(Request $request , $id)
+    {
+        $data = Warning::updateorcreate(
+        [
+            'id' => $id,
+        ],
+        [
+            'id' => $id,
+            'text' => $request->text,
+        ]
+    );
+        return back();
+
+    }
     public function create()
     {
         //
