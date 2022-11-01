@@ -23,7 +23,7 @@ class CreateMobilesTable extends Migration
             $table->text('notes')->nullable();
             $table->integer('status')->nullable()->default(0);
             $table->timestamp('date');
-            $table->foreignId('user_id')->nullable()->onDelete('cascade');;
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

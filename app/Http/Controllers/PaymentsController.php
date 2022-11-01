@@ -51,7 +51,7 @@ class PaymentsController extends Controller
             auth()->user()->notify(new ExpiredMobileNotification($mobile));
         }
 
-        return redirect()->back()->withSuccessMessage('تمت إضافة الدفعة بنجاح');
+        return redirect()->back();
 
     }
     public function requiredPayment()
@@ -60,7 +60,6 @@ class PaymentsController extends Controller
         $mobilePayments = Mobile::UserActiveMobiles()->with('mobile_payments','customer')
             ->where('date', '<=', Carbon::now()->subDays(30)->toDateTimeString())
             ->get();
-
 
         return view('admin.payments.requiredPayments',compact('mobilePayments'))->with('i');
 

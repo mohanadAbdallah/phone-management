@@ -45,6 +45,13 @@
                         </div>
                     </div>
                     <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.alternative_phone')
+                            <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
+                        <div class="col-lg-8 d-flex align-items-center">
+                            <span class="fw-bolder fs-6 me-2" >{{ $customer->alternative_phone ?? '--'}}</span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.mobile_type')</label>
                         <div class="col-lg-8 fv-row">
                             <span class="fw-bold fs-6">  {{ $customer->mobile->mobile_name ?? ''}}</span>
@@ -53,7 +60,7 @@
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.date_of_buy')</label>
                         <div class="col-lg-8 fv-row">
-                            <span class="fw-bold fs-6">  {{ $customer->mobile->created_at?? '--' }}</span>
+                            <span class="fw-bold fs-6">  {{ $customer->mobile->created_at->format('Y-m-d') ?? '--' }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">

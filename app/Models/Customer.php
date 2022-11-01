@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -12,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Customer extends Authenticatable
 {
-    use HasFactory,HasApiTokens,Notifiable,SoftDeletes;
+    use HasFactory,HasApiTokens,Notifiable,SoftDeletes,CascadeSoftDeletes;
 
     protected $fillable=[
         'customer_name',
@@ -23,9 +24,12 @@ class Customer extends Authenticatable
         'created_at',
     ];
 
+    protected $cascadeDeletes = ['mobile'];
+    protected $dates = ['deleted_at'];
+
     public function mobile()
     {
-        return $this->hasOne(Mobile::class,'customer_id');
+        return $this->hasOne(Mobile::class);
     }
 
     public function getStatusColorAttribute()

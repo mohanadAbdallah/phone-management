@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,18 +13,22 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable ,  HasRoles , SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable ,  HasRoles , SoftDeletes ,CascadeSoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+    protected $cascadeDeletes = ['customers'];
+    protected $dates = ['deleted_at'];
+
     protected $fillable = [
         'name',
         'email',
         'phone',
         'password',
+
     ];
     protected $appends=['total_salaries'];
 

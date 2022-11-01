@@ -27,7 +27,6 @@ class storeCustomerRequest extends FormRequest
             'customer_name'=>'required|unique:customers,customer_name',
             'phone'=>'required',
             'address'=>'required',
-            'email'=>'required',
             'identity'=>'required',
         ];
     }

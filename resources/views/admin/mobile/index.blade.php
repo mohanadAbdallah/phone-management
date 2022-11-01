@@ -3,6 +3,7 @@
 
 @section('content')
     @include('includes.messages')
+    @include('sweetalert::alert')
     <div class="card">
         <div class="card-header header-elements-inline">
             <h2 class="card-title"><b>@lang('app.premiums')</b></h2>
@@ -70,12 +71,12 @@
                                     </li>
                                 </ul>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <span class="{{$item->status_color}}">{{$item->status_name}}</span>
                             </td>
                             <td class="text-center" >
                                 <div class="list-icons">
-                                    <a href="{{route('customers.edit',$item->customer->id ?? '')}}" class="list-icons-item">
+                                    <a href="{{route('mobiles.edit',$item->id ?? '')}}" class="list-icons-item">
                                         <span class="badge badge-secondary badge-pill">  <i class="icon-pencil7"></i></span>
 
                                     </a>

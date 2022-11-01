@@ -77,6 +77,15 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label ">@lang('app.alternative_phone')</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control @error('alternative_phone')is-invalid @enderror" value="{{old('alternative_phone')}}" placeholder=" @lang('app.alternative_phone')" name="alternative_phone"/>
+                                        @if ($errors->has('alternative_phone'))
+                                            <span class="text-danger">{{ $errors->first('alternative_phone') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
 
 
                                 <div class="form-group row">
@@ -88,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.identity')</label>
+                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label ">@lang('app.identity')</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control @error('identity')is-invalid @enderror" value="{{old('identity')}}" placeholder="@lang('app.identity_no')" name="identity"/>
                                         @if ($errors->has('identity'))

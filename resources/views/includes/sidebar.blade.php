@@ -72,10 +72,10 @@
                     <a href="{{route('customers.index')}}" class=" font-size-lg nav-link {{request()->routeIs('customers.*')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.customers')</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('payments.required')}}" class=" font-size-lg nav-link {{request()->routeIs('payments.*')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.required_premium')</span></a>
+                    <a href="{{route('payments.required')}}" class=" font-size-lg nav-link {{request()->routeIs('payments.*')?'nav-link active' :'' }}"><i class="icon-redo"></i> <span>@lang('app.required_premium')</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('mobile.expired')}}" class=" font-size-lg nav-link {{request()->routeIs('mobile.expired')?'nav-link active' :'' }}"><i class="icon-user"></i> <span>@lang('app.expired_mobile')</span></a>
+                    <a href="{{route('mobile.expired')}}" class=" font-size-lg nav-link {{request()->routeIs('mobile.expired')?'nav-link active' :'' }}"><i class="icon-trash"></i> <span>@lang('app.expired_mobile')</span></a>
                 </li>
                 <li class="nav-item" >
 

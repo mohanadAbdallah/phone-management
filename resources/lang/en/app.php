@@ -173,6 +173,7 @@ return [
     'cities' => 'Cities',
     'reports' => 'Reports',
     'phone' => 'phone number',
+    'alternative_phone' => 'guarantor phone number',
     'delete' => 'Delete',
     'delete_all' => 'Delete All',
     'copy' => 'Copy',

@@ -27,7 +27,6 @@ class StorePremiumRequest extends FormRequest
             'customer_name'=>'required',
             'address'=>'required',
             'phone'=>'required|numeric',
-            'identity'=>'required|numeric',
             'mobile_name'=>'required',
             'type'=>'required',
             'salary'=>'required|numeric',

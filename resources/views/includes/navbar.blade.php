@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-md navbar-dark" style="background-color: #ffffff" id="navbar-mobile">
+<div class="navbar navbar-expand-md navbar-dark " style="background-color: #ffffff" id="navbar-mobile">
     <div class="navbar-brand">
 
     </div>

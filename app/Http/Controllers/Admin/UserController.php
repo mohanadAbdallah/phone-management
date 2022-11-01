@@ -75,14 +75,13 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
             'roles' => 'required',
             'phone' => 'required',
-
-
         ]);
 
         $input = $request->all();
@@ -101,9 +100,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
         return view('admin.users.show',compact('user'));
     }
 

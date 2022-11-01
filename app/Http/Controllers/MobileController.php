@@ -24,6 +24,31 @@ class MobileController extends Controller
         return view('admin.mobile.index',compact('mobile','notifications'))->with('i');
 
     }
+
+    public function edit(Mobile $mobile)
+    {
+        return view('admin.mobile.edit',compact('mobile'));
+
+    }
+    public function update(Request $request , Mobile $mobile)
+    {
+        $input = $request->all();
+        if (!$mobile->mobile_payments){
+            $input['residual']=$input['salary'];
+        }
+        else{
+            $totalPayments =null;
+            foreach ($mobile->mobile_payments as $item){
+                $totalPayments += $item->payment;
+            }
+            $input['residual']= $input['salary'] - $totalPayments;
+        }
+
+        $mobile->update($input);
+
+        return redirect()->route('mobiles.index')->withSuccessMessage(__('app.successfully_edited'));
+
+    }
     public function expired(){
 
         $expired_premiums_salary = Mobile::UserMobiles()->where('status',1)
@@ -81,7 +106,12 @@ class MobileController extends Controller
 
     public function store(StorePremiumRequest $request)
     {
-      $customer = auth()->user()->customers()->create($request->validated());
+        $validated_data= $request->validated();
+        $validated_data['alternative_phone']=$request->alternative_phone;
+        $validated_data['identity']=$request->identity;
+
+
+      $customer = auth()->user()->customers()->create($validated_data);
       $mobile= $customer->mobile()->create(
           [
               'mobile_name'=>$request->mobile_name,
@@ -97,8 +127,8 @@ class MobileController extends Controller
         $mobile->customer()->update([
             'mobile_id'=>$mobile->id,
         ]);
-
-        return redirect()->route('customers.showPayments',$customer->id)->withSuccessMessage(__('app.successfully_added'));
+//->withSuccessMessage(__('app.successfully_added'));
+        return redirect()->route('customers.showPayments',$customer->id);
     }
 
 }

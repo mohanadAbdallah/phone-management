@@ -37,7 +37,7 @@
                         <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.phone')
                             <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i></label>
                         <div class="col-lg-8 d-flex align-items-center">
-                            <span class="fw-bolder fs-6 me-2" >{{ $user->mobile }}</span>
+                            <span class="fw-bolder fs-6 me-2" >{{ $user->phone }}</span>
                         </div>
                     </div>
 

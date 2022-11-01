@@ -72,6 +72,7 @@ class SettingController extends Controller
         ],
         [
             'id' => $id,
+            'user_id'=>auth()->user()->id,
             'text' => $request->text,
         ]
     );

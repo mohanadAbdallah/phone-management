@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Notifications\ExpiredMobileNotification;
 use App\Notifications\requiredPaymentNotification;
+use Dyrynda\Database\Support\CascadeSoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,11 @@ use Illuminate\Notifications\Notification;
 
 class Mobile extends Model
 {
-    use HasFactory ,Notifiable,SoftDeletes;
+    use HasFactory ,Notifiable,SoftDeletes ,CascadeSoftDeletes;
+
+    protected $cascadeDeletes = ['mobile_payments'];
+    protected $dates = ['deleted_at'];
+
     protected $fillable = ['mobile_name','type','salary','residual','customer_id','created_at','date','status','user_id'];
 
     protected $appends=['status_name', 'status_color'];
@@ -21,20 +26,6 @@ class Mobile extends Model
     {
         return $this->hasMany(mobile_payment::class);
     }
-//    public function getResidualAttribute()
-//    {
-//        $residual = $this->salary;
-//        $mobile = $this;
-//        foreach ($this->mobile_payments as $mobile_payments) {
-//            $residual -= $mobile_payments->payment;
-//            if ($residual <= 0 ){
-//                Mobile::update(['status'=>1]);
-//            }else{
-//                Mobile::update(['status'=>0]);
-//            }
-//        }
-//        return $residual;
-//    }
 
 
     public function customer(){
