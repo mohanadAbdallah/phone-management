@@ -76,7 +76,8 @@ class PaymentsController extends Controller
     public function deleteAllPayments(Mobile $mobile)
     {
         mobile_payment::where('mobile_id',$mobile->id)->delete();
-
+        $mobile->residual = $mobile->salary;
+        $mobile->save();
         return redirect()->back()->withSuccessMessage(__('app.successfully_deleted'));
     }
     public function destroy($id)

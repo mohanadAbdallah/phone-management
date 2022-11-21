@@ -2,8 +2,33 @@
 @section('content')
     @include('includes.messages')
     @include('sweetalert::alert')
-    <div class="content-body">
+{{--    <div class="form-group row">--}}
+{{--        <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">@lang('app.search')</label>--}}
+{{--        <div class="col-sm-4">--}}
+{{--            <input type="text" class="form-control" placeholder="@lang('app.search')"   name="p"/>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
+    <form action="{{ route('customers.index') }}" id="form_search" enctype="multipart/form-data">
+        @csrf
+    <div class="input-group col-md-6 mt-5 mb-4 col-sm-12 mb-2"
+         style="margin-right: 15px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping">بحث نصي</span>
+            <input type="hidden" name="per_page" class="per_page">
+        </div>
+        <input type="text" class="form-control" autocomplete="chrome-off"
+               name="q"
+               value="{{request()->get('q')}}"
+               aria-describedby="addon-wrapping">
+
+        <button type="submit" class="btn btn-primary mr-1 ml-1">
+            <i class="la la-search"></i> بحث
+        </button>
+    </div>
+    </form>
+<hr>
+    <div class="content-body mt-4">
         <div class="row">
 
                     @foreach($customer as $item)

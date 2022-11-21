@@ -49,7 +49,7 @@
                             <div class="col-md-7">
                                 <h2>@lang('app.customer_details') </h2>
                                 <div class="mt-4 form-group row">
-                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.name') :</label>
+                                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label required">@lang('app.name') :</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control @error('customer_name')is-invalid @enderror" placeholder=" @lang('app.name')" value="{{$customer->customer_name}}" name="customer_name"/>
                                         @if ($errors->has('customer_name'))
@@ -57,8 +57,9 @@
                                         @endif
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
-                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.phone')</label>
+                                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label required">@lang('app.phone')</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control @error('mobile')is-invalid @enderror" placeholder=" @lang('app.phone')" value="{{$customer->phone}}" name="phone"/>
                                         @if ($errors->has('mobile'))
@@ -68,16 +69,16 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label">@lang('app.alternative_phone')</label>
+                                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label">@lang('app.alternative_phone')</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control @error('alternative_phone')is-invalid @enderror" placeholder=" @lang('app.alternative_phone')" value="{{$customer->alternative_phone ?? '--'}}" name="alternative_phone"/>
+                                        <input type="text" class="form-control @error('alternative_phone')is-invalid @enderror" placeholder=" @lang('app.alternative_phone')" value="{{$customer->alternative_phone ?? ''}}" name="alternative_phone"/>
                                         @if ($errors->has('alternative_phone'))
                                             <span class="text-danger">{{ $errors->first('alternative_phone') }}</span>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.address')</label>
+                                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label required">@lang('app.address')</label>
                                     <div class="col-sm-8">
 
                                         <input type="text" class="form-control @error('address')is-invalid @enderror" placeholder="@lang('app.address')" value="{{$customer->address}}"  name="address"/>
@@ -85,11 +86,29 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="exampleFormControlInput1" class="col-sm-2 col-form-label required">@lang('app.identity')</label>
+                                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label required">@lang('app.identity')</label>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control @error('identity')is-invalid @enderror" placeholder="@lang('app.identity_no')" value="{{$customer->identity}}" name="identity"/>
                                         @if ($errors->has('identity'))
                                             <span class="text-danger">{{ $errors->first('identity') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="mt-4 form-group row">
+                                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label required">@lang('app.mobile_name') :</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control @error('mobile_name')is-invalid @enderror" placeholder=" @lang('app.mobile_name')" value="{{$customer->mobile->mobile_name}}" name="mobile_name"/>
+                                        @if ($errors->has('mobile_name'))
+                                            <span class="text-danger">{{ $errors->first('mobile_name') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleFormControlInput1" class="col-sm-3 col-form-label required">@lang('app.date_of_buy')</label>
+                                    <div class="col-sm-8">
+                                        <input type="date" class="form-control @error('created_at')is-invalid @enderror" value="{{$customer->mobile->created_at->format('Y-m-d')}}" name="created_at"/>
+                                        @if ($errors->has('created_at'))
+                                            <span class="text-danger">{{ $errors->first('created_at') }}</span>
                                         @endif
                                     </div>
                                 </div>

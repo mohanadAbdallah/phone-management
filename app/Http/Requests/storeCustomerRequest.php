@@ -26,6 +26,7 @@ class storeCustomerRequest extends FormRequest
         return [
             'customer_name'=>'required|unique:customers,customer_name',
             'phone'=>'required',
+            'alternative_phone'=>'required',
             'address'=>'required',
             'identity'=>'required',
         ];

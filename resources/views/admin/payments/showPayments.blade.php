@@ -69,11 +69,21 @@
     <form action="{{route('payments.store',$customer->mobile->id)}}" method="post">
         @method('POST')
         @csrf
+
     <div class="card">
+
         <div class="card-header header-elements-inline">
             <div class="header-elements">
                 <h2 class="card-title"><b>{{$customer->customer_name  ?? '--'}}</b></h2>
+
             </div>
+
+            <a class="btn btn-danger" href="javascript:void(0)"
+               onclick="delete_all('{{$customer->mobile->id}}')"
+               data-toggle="modal"
+               data-target="#delete_payments_modal">@lang('app.delete_all')
+                <i class="icon-trash  mx-2"></i>
+            </a>
         </div>
 
         <div class="card-body">
@@ -137,7 +147,7 @@
                                                 <input class="form-control" type="text" placeholder="@lang('app.description')" name="description">
                                             </div>
                                             <div class="col-md-4">
-                                                <input class="form-control" value="<?= date('Y-m-d') ?>" type="date" name="created_at">
+                                                <input class="form-control" value="{{$customer->mobile->created_at}}" type="date" name="created_at">
                                             </div>
                                         </div>
 
@@ -158,7 +168,8 @@
                             </td>
                             <td><input class="form-control" type="text" placeholder="@lang('app.add_new_payment')" name="payment"></td>
                             <td><input class="form-control" type="text" placeholder="@lang('app.description')" name="description"></td>
-                            <td><input class="form-control" value="<?= date('Y-m-d') ?>" type="date" name="created_at"></td>
+                            <td><input class="form-control" value="{{$customer->mobile->created_at->format('Y-m-d')}}" type="date" name="created_at"></td>
+
                         </tr>
 
                         </tbody>
@@ -176,7 +187,7 @@
 
     </form>
 
-    <!--DELETE Modal -->
+    <!--DELETE ITEM Modal -->
     <div id="delete_item_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -207,6 +218,36 @@
      </div>
         <!-- /.modal-dialog -->
 
+    <!--DELETE PAYMENTS Modal -->
+    <div id="delete_payments_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="delete_all_form" method="post" action="">
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <input name="id" id="payments_id" class="form-control" type="hidden">
+                    <input name="_method" type="hidden" value="DELETE">
+                    <div class="modal-header">
+                        <h4>@lang('app.confirm_delete_all')</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <h5>@lang('app.confirm_delete_question')</h5>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">@lang('app.close')</button>
+                        <button type="submit" class="btn btn-danger waves-effect" id="delete_url">@lang('app.delete')</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+     </div>
+        <!-- /.modal-dialog -->
+
         <script>
         function delete_item_customers(id, title) {
             $('#item_id').val(id);
@@ -214,6 +255,11 @@
             $('#delete_form').attr('action', url);
             $('#grup_title').text(title);
             $('#del_label_title').html(title);
+        }
+        function delete_all(id) {
+            $('#payments_id').val(id);
+            var url = "{{url('ar/delete-all-payments')}}/"+id;
+            $('#delete_all_form').attr('action', url);
         }
     </script>
 

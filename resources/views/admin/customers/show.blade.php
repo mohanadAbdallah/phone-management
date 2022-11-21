@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="row mb-7">
-                        <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.mobile_type')</label>
+                        <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.mobile_name')</label>
                         <div class="col-lg-8 fv-row">
                             <span class="fw-bold fs-6">  {{ $customer->mobile->mobile_name ?? ''}}</span>
                         </div>
@@ -60,13 +60,19 @@
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.date_of_buy')</label>
                         <div class="col-lg-8 fv-row">
-                            <span class="fw-bold fs-6">  {{ $customer->mobile->created_at->format('Y-m-d') ?? '--' }}</span>
+                            <span class="fw-bold fs-6">  {{ $customer->mobile->created_at?? '--' }}</span>
                         </div>
                     </div>
                     <div class="row mb-7">
                         <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.residual')</label>
                         <div class="col-lg-8 fv-row">
                             <span class="fw-bold fs-6">  {{ $customer->mobile->residual ?? '--' }}</span>
+                        </div>
+                    </div>
+                    <div class="row mb-7">
+                        <label class="col-lg-4 fw-bold text-muted" style="font-size: 14px">@lang('app.identity')</label>
+                        <div class="col-lg-8 fv-row">
+                            <span class="fw-bold fs-6">  {{ $customer->identity ?? '--' }}</span>
                         </div>
                     </div>
                 </div>

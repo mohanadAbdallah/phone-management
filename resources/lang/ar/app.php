@@ -203,6 +203,7 @@
     'ar' => 'العربية',
     'en' => 'الإنجليزية',
     'image'=>'صورة',
+    'add_image'=>'إختر صورة',
     'email' => 'الإيميل',
     'phone' => 'رقم الجوال',
     'alternative_phone' => 'رقم جوال الكفيل ',
@@ -237,6 +238,7 @@
     'delete' => 'حذف',
     'delete_all' => 'حذف الكل',
    'confirm_delete_all' => 'تأكيد حذف الكل',
+   'confirm_delete_question' => 'هل أنت متأكد تريد حذف كافة الدفعات ؟',
    'confirm_delete_item' => 'تأكيد حذف العنصر',
 
       'main_photo'=>'الصورة الرئيسية',

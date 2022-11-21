@@ -53,10 +53,12 @@ Route::group(['middleware'=>'auth'],function (){
     Route::resource('mobiles',MobileController::class);
       //payments
     Route::resource('payments', PaymentsController::class);
+    Route::delete('delete-all-payments/{mobile}', [PaymentsController::class,'deleteAllPayments'])->name('delete_all_payments');
+
     Route::post('{id}/payments',[PaymentsController::class,'store'])->name('payments.store');
     Route::post('{id}/payments/print', [CustomersController::class,'printPayments'])->name('payments.print');
     Route::get('requiredPayment',[PaymentsController::class,'requiredPayment'])->name('payments.required');
-    Route::delete('deleteAllPayments/{mobile}',[PaymentsController::class,'deleteAllPayments'])->name('payments.deleteAll');
+    //Route::delete('deleteAllPayments/{mobile}',[PaymentsController::class,'deleteAllPayments'])->name('payments.deleteAll');
       //Customer
     Route::resource('customers', CustomersController::class);
     Route::get('{id}/showPayments', [CustomersController::class,'showPayments'])->name('customers.showPayments');
