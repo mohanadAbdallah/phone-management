@@ -234,7 +234,6 @@
     @parent
     @if(auth()->user()->is_admin)
         <script>
-
             $(function() {
                 $('.mark-as-read').click(function() {
                     let request = sendMarkRequest($(this).data('id'));

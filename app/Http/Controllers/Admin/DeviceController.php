@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DeviceRequest;
 use App\Models\Device;
 use Illuminate\Http\Request;
 
@@ -19,27 +21,18 @@ class DeviceController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(DeviceRequest $request)
     {
-        $device = $request->validate([
-            'name' => 'required',
-            'color' => 'required',
-            'type' => 'required',
-            'price' => ['required','numeric'],
-            'storage' => ['required','numeric'],
-            'ram' => ['required','numeric']
-        ]);
+        $validatedData = $request->validated();
 
-        if ($request->hasFile('image') && $request->image != null){
+        if ($request->hasFile('image')) {
             $imageName = $request->image->getClientOriginalName();
-            $request->image->storeAs('public/images', $imageName);
-            $device['image'] = $imageName;
+            $request->file('image')->storeAs('images', $imageName, 'public');
+            $validatedData['image'] = $imageName;
         }
 
-        $device['description'] = $request->description ?? null;
-        $device['user_id'] = auth()->user()->id;
-
-        Device::create($device);
+        $validatedData['user_id'] = auth()->user()->id;
+        Device::create($validatedData);
 
         return redirect()->route('devices.index')->withSuccessMessage(__('app.successfully_created'));
     }
@@ -47,42 +40,37 @@ class DeviceController extends Controller
 
     public function show(Device $device)
     {
-        return view('admin.devices.show',compact('device'));
+        return view('admin.devices.show', compact('device'));
     }
 
     public function edit(Device $device)
     {
-        return view('admin.devices.edit',compact('device'));
+        return view('admin.devices.edit', compact('device'));
     }
 
 
-    public function update(Request $request, Device $device)
+    public function update(DeviceRequest $request, Device $device)
     {
-        $editedDevice = $request->validate([
-            'name' => 'required',
-            'color' => 'required',
-            'type' => 'required',
-            'price' => ['required','numeric'],
-            'storage' => ['required','numeric'],
-            'ram' => ['required','numeric']
-        ]);
+        $validatedData = $request->validated();
 
-        if ($request->hasFile('image') && $request->image != null){
+        if ($request->hasFile('image')) {
             $imageName = $request->image->getClientOriginalName();
-            $request->image->storeAs('public/images', $imageName);
-            $editedDevice['image'] = $imageName;
+            $request->file('image')->storeAs('images', $imageName, 'public');
+            $validatedData['image'] = $imageName;
         }
-        $editedDevice['description'] = $request->description ?? null;
-        $editedDevice['user_id'] = auth()->user()->id;
 
-        $device->update($editedDevice);
-        return redirect()->route('devices.show',$device->id)->withSuccessMessage(__('app.successfully_updated'));
+        $validatedData['user_id'] = auth()->user()->id;
+
+        $device->update($validatedData);
+        return redirect()->route('devices.show', $device->id)->withSuccessMessage(__('app.successfully_updated'));
     }
 
     public function destroy(Device $device)
     {
-        if(file_exists("storage/images/".$device->image)){
-            unlink("storage/images/".$device->image);
+        if (file_exists("storage/images/" . $device->image)) {
+            if ($device->image) {
+                unlink("storage/images/" . $device->image);
+            }
         }
 
         $device->delete();

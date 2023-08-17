@@ -24,10 +24,14 @@ class DeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required',
-            'color'=>'required',
-            'type'=>'required',
-            'price'=>'required',
+            'name' => ['required'],
+            'color' => ['required'],
+            'type' => ['required'],
+            'price' => ['required','numeric'],
+            'storage' => ['required','numeric'],
+            'ram' => ['required','numeric'],
+            'description' => ['nullable'],
+            'image' => ['nullable']
         ];
     }
 }
