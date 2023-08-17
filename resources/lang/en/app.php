@@ -9,7 +9,7 @@ return [
     'successfully_added'=>'Successfully Added ',
     'successfully_deleted'=>'Successfully Deleted',
     'successfully_edited'=>'Successfully Edited',
-
+    'added'=>'Added',
     //notifications
 
     'mark_all_as_read' =>'Mark all as read',
@@ -43,7 +43,27 @@ return [
     'expired_premiums'=>'Expired Premiums',
     'expired'=>'Expired',
 
+    'devices'=>'Devices',
+    'device_details'=>'Device Details',
+    'add_device'=>'Add new device',
+    'device_type'=>'Device Type',
+    'other'=>'Other ..',
+    'images'=>'Images',
+    'storage'=>'Storage',
+    'ram'=>'Ram',
+
+    'Are you sure, delete this device ?'=>'Are you sure, delete this device ?',
+
+
+    'details'=>'Details',
+    'preview'=>'Preview',
+
     'orders' => 'Orders',
+    'trader' => 'trader',
+    'trader_details' => 'trader details',
+    'add_trader' => 'add new trader',
+    'mobile_accessories' => 'Mobile Accessories',
+    'display_screens' => 'Display Screens',
     'services' => 'Services',
     'service' => 'Service',
     'letter_file'=>'authorization file',
@@ -125,6 +145,7 @@ return [
     'type_account'=>'Type Account',
     'table_order'=>'Order Display Table',
     'confirm_delete_item' => 'Confirm Delete Item',
+    'confirm_delete' => 'Confirm Delete',
     'confirm_delete_all' => 'Confirm Delete All',
     'confirm_delete_question' => 'Are you sure delete all payments ?',
     'completeOrder' => 'Complete Order ',

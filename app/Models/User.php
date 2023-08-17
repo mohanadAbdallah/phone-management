@@ -69,4 +69,14 @@ class User extends Authenticatable
         return $this->hasMany(Mobile::class);
 
     }
+    public function traders()
+    {
+        return $this->hasMany(Trader::class);
+
+    }
+
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 }

@@ -90,7 +90,7 @@
             </li>
             <li class="nav-item dropdown dropdown-user">
                 <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown" style="color: #000000">
-                    <img src="../../../../global_assets/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
+                    <img src="{{ asset('global_assets/images/username.png') }}" class="rounded-circle mr-2" height="34" alt="">
                     <span> {{ Auth::user()->name }}</span>
                 </a>
 

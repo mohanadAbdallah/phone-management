@@ -1,14 +1,16 @@
 <?php
 
 
-use App\Http\Controllers\MobileController;
-use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\Admin\CustomersController;
+use App\Http\Controllers\Admin\DeviceController;
+use App\Http\Controllers\Admin\MobileController;
+use App\Http\Controllers\Admin\PaymentsController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\TraderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Admin\UserController;
-use \App\Http\Controllers\Admin\SettingController;
-use \App\Http\Controllers\Admin\RoleController;
-use \App\Http\Controllers\Admin\CustomersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +66,12 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('{id}/showPayments', [CustomersController::class,'showPayments'])->name('customers.showPayments');
     Route::get('/customers/export/excel', [CustomersController::class,'export'])->name('customers.export.excel');
     Route::get('print', [CustomersController::class, 'print'])->name('print');
+
+     //trader
+     Route::resource('traders',TraderController::class);
+
+     //devices
+     Route::resource('devices',DeviceController::class);
 });
 
   Route::group(['middleware'=>['role:Super_Admin']],function (){

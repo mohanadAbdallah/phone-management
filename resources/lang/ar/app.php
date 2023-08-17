@@ -9,6 +9,8 @@
       'error'=>'فشل !!',
       'warning'=>'تحذير !!',
 
+      'added'=>'تمت الإضافة',
+
       //notification
       'mark_all_as_read'=> 'تحديد الكل كمقروء',
       'mark_as_read'=> 'تحديد كمقروء',
@@ -23,7 +25,7 @@
       'mobile'=>'جوال',
       'mobile_type'=>'نوع الجوال',
       'date_of_buy'=>'تاريخ شراء الجوال',
-      'mobiles'=>'الجوالات',
+      'mobiles'=>'جوالات',
       'expired_mobile'=>'الأقساط المنتهية',
       'premiums'=>'الأقساط',
       'remain'=>'المتبقي',
@@ -49,7 +51,23 @@
       'expired_premiums_salary_in_six_month'=>'معدل الربح خلال ست شهور',
       'expired'=>'منتهي',
 
+      'devices'=>'الأجهزة',
+      'device_details'=>'تفاصيل الجهاز',
+      'add_device'=>'إضافة جهاز جديد ',
+      'device_type'=>'نوع الجهاز ',
+      'other'=>'أخرى ..',
+      'images'=>'الصور',
+      'storage'=>'ذاكرة التخزين',
+      'ram'=>'الرام',
 
+      'details'=>'التفاصيل',
+      'preview'=>'عرض',
+
+      'trader' => 'التجار',
+      'add_trader' => 'إضافة تاجر جديد',
+      'trader_details' => 'بيانات التاجر',
+      'display_screens' => 'شاشات عرض',
+      'mobile_accessories' => 'إكسسوارات جوال',
       'services' => 'الخدمات',
       'service' => 'الخدمة',
       'cars' => 'السيارات',
@@ -240,6 +258,10 @@
    'confirm_delete_all' => 'تأكيد حذف الكل',
    'confirm_delete_question' => 'هل أنت متأكد تريد حذف كافة الدفعات ؟',
    'confirm_delete_item' => 'تأكيد حذف العنصر',
+   'confirm_delete' => 'تأكيد الحذف',
+
+      'Are you sure, delete this device ?'=>'هل أنت متأكد, من عملية حذف هذا الجهاز ؟ ',
+
 
       'main_photo'=>'الصورة الرئيسية',
       'detailed_photo'=>'الصور التفصيلية',

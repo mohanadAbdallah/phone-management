@@ -116,12 +116,12 @@
     </div>
 
      <script>
-        function delete_item_customers(id, title) {
-            $('#item_id').val(id);
-            var url = "{{url('ar/customers')}}/" + id;
-            $('#delete_form').attr('action', url);
-            $('#grup_title').text(title);
-            $('#del_label_title').html(title);
-        }
+            function delete_item_customers(id, title) {
+                $('#item_id').val(id);
+                var url = "{{url('ar/customers')}}/" + id;
+                $('#delete_form').attr('action', url);
+                $('#grup_title').text(title);
+                $('#del_label_title').html(title);
+            }
     </script>
 @endsection

@@ -27,7 +27,7 @@
             </div>
             <div class="datatable-scroll">
                 <div class="row">
-                    @foreach($user as $item)
+                    @foreach($users as $item)
                     <div class="col-sm-6 col-xl-6">
                         <div class=" card -grey-300 " style="border-radius: 20px;" >
                             <div class=" rounded-round card-header bg-white header-elements-inline"  style="border-bottom-left-radius: 50px;">

@@ -6,7 +6,6 @@
         @endif
         @include('includes.head')
 
-
         <body>
         <!-- Main navbar -->
         @include('includes.navbar')

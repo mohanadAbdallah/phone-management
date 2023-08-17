@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -21,11 +22,14 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+    protected function attemptLogin(Request $request)
+    {
+        $remember =$request->has('remember');
+        return $this->guard()->attempt(
+            $this->credentials($request), $remember
+        );
+    }
+
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**

@@ -51,8 +51,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $user =User::get();
-        return view('admin.users.index',compact('user'))->with('i');
+        $users =User::get();
+        return view('admin.users.index',compact('users'))->with('i');
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAlternativePhoneToCustomers extends Migration
+class ChangeTradersTableColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddAlternativePhoneToCustomers extends Migration
      */
     public function up()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            $table->string('alternative_phone')->nullable();
+        Schema::table('traders', function (Blueprint $table) {
+            $table->integer('type')->nullable()->default(0);
         });
     }
 
@@ -25,8 +25,6 @@ class AddAlternativePhoneToCustomers extends Migration
      */
     public function down()
     {
-        Schema::table('customers', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

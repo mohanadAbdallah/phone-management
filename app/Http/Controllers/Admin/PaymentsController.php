@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentsRequest;
 use App\Models\Mobile;
 use App\Models\mobile_payment;
 use App\Notifications\ExpiredMobileNotification;
 use Carbon\Carbon;
+use function __;
+use function auth;
+use function redirect;
+use function view;
 
 
 class PaymentsController extends Controller
@@ -51,7 +56,7 @@ class PaymentsController extends Controller
             auth()->user()->notify(new ExpiredMobileNotification($mobile));
         }
 
-        return redirect()->back();
+        return redirect()->back()->withSuccessMessage(__('app.successfully_added'));
 
     }
     public function requiredPayment()

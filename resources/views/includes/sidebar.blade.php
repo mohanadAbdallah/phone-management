@@ -78,7 +78,12 @@
                     <a href="{{route('mobile.expired')}}" class=" font-size-lg nav-link {{request()->routeIs('mobile.expired')?'nav-link active' :'' }}"><i class="icon-trash"></i> <span>@lang('app.expired_mobile')</span></a>
                 </li>
                 <li class="nav-item" >
-
+                    <a href="{{route('traders.index')}}" class="font-size-lg  nav-link {{request()->routeIs('traders.*')?'nav-link active' :'' }}"><i class="icon-tree6"></i><span>@lang('app.trader')</span></a>
+                </li>
+                <li class="nav-item" >
+                    <a href="{{route('devices.index')}}" class="font-size-lg  nav-link {{request()->routeIs('devices.*')?'nav-link active' :'' }}"><i class="icon-presentation"></i><span>@lang('app.devices')</span></a>
+                </li>
+                <li class="nav-item" >
                     <a href="{{route('setting.warning')}}" class="font-size-lg  nav-link {{request()->routeIs('setting.warning')?'nav-link active' :'' }}"><i class="icon-alert"></i><span>@lang('app.Warnings')</span></a>
                 </li>
                 @endrole

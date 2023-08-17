@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePremiumRequest;
-use App\Models\Alert;
-use App\Models\Customer;
 use App\Models\Mobile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\DB;
+use function __;
+use function auth;
+use function redirect;
+use function response;
+use function view;
 
 class MobileController extends Controller
 {
@@ -127,8 +129,7 @@ class MobileController extends Controller
         $mobile->customer()->update([
             'mobile_id'=>$mobile->id,
         ]);
-//->withSuccessMessage(__('app.successfully_added'));
-        return redirect()->route('customers.showPayments',$customer->id);
+        return redirect()->route('customers.showPayments',$customer->id)->withSuccessMessage(__('app.successfully_added'));
     }
 
 }
